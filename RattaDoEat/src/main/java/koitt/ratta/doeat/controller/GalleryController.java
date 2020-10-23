@@ -11,12 +11,17 @@ import koitt.ratta.doeat.service.GalleryService;
 public class GalleryController {
 	
 	@Autowired
-	GalleryService galleryService;
+	GalleryService service;
 	
 	@GetMapping("gallery")
 	public String viewAllGallery(Model model) {
-		model.addAttribute("gallery", galleryService.viewAll());
+		model.addAttribute("gallery", service.viewAll());
 		return "gallery";
+	}
+	
+	@GetMapping("gallery_like")
+	public int addLike(int gIdx) {
+		return service.addLike(gIdx);
 	}
 
 }

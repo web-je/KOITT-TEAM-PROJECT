@@ -7,9 +7,14 @@
 <body>
 	<div class="wrap" id="galList">
 		<div th:each = "post : ${gallery}">
-			<span th:text = "${post.GIdx}"></span>
+			<span th:text = "${post.gIdx}"></span>
 			<span th:text = "${post.content}"></span>
+			<span>like</span>
+			<span th:text = "${post.likeNum}"></span>
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	
+</script>
 </html>

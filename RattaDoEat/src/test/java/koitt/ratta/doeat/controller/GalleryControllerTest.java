@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import koitt.ratta.doeat.controller.GalleryController;
 import koitt.ratta.doeat.domain.GalleryVo;
-import koitt.ratta.doeat.service.GalleryService;
 
 @WebMvcTest(controllers = GalleryController.class)
 public class GalleryControllerTest {
@@ -32,6 +31,14 @@ public class GalleryControllerTest {
 			   .andExpect(status().isOk())
 			   .andExpect(view().name("gallery"))
 			   .andExpect(model().attribute("gallery", gallery));
+		
+	}
+	
+	@Test
+	public void likeTest() throws Exception{
+		
+		mockMvc.perform(get("/gallery_like"))
+			   .andDo(print());
 		
 	}
 	

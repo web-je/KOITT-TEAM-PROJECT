@@ -8,4 +8,8 @@ public interface GalleryDao {
 
 	List<GalleryVo> viewAll();
 
+	int addLike(int gIdx);
+
+	int viewLike(int gIdx);
+
 }

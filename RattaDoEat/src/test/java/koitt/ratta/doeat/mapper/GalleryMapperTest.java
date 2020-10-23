@@ -20,5 +20,15 @@ public class GalleryMapperTest {
 								.get(0)
 								.getContent()).isEqualTo("content");
 	}
+	
+	@Test
+	public void addLikeTest() {
+		assertThat(galleryMapper.addLike(1)).isEqualTo(1);
+	}
+	
+	@Test
+	public void viewLikeTest() {
+		assertThat(galleryMapper.viewLike(2)).isEqualTo(0);
+	}
 
 }
