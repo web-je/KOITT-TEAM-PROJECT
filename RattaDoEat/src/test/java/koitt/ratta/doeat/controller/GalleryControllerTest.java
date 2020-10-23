@@ -32,6 +32,7 @@ public class GalleryControllerTest {
 			   .andExpect(status().isOk())
 			   .andExpect(view().name("gallery"))
 			   .andExpect(model().attribute("gallery", gallery));
+		
 	}
 	
 }
