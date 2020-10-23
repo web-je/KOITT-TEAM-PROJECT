@@ -1,4 +1,4 @@
-package koitt.ratta.rde;
+package koitt.ratta.doeat;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

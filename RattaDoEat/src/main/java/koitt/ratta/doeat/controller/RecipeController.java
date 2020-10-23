@@ -1,4 +1,4 @@
-package koitt.ratta.rde.controller;
+package koitt.ratta.doeat.controller;
 
 import org.springframework.stereotype.Controller;
 
