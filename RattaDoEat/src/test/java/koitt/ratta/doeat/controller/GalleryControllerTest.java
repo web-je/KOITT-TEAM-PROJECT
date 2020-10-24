@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-import koitt.ratta.doeat.controller.GalleryController;
 import koitt.ratta.doeat.domain.GalleryVo;
 
 @WebMvcTest(controllers = GalleryController.class)
@@ -29,7 +28,7 @@ public class GalleryControllerTest {
 		mockMvc.perform(get("/gallery"))
 			   .andDo(print())
 			   .andExpect(status().isOk())
-			   .andExpect(view().name("gallery"))
+			   .andExpect(view().name("gallerList"))
 			   .andExpect(model().attribute("gallery", gallery));
 		
 	}

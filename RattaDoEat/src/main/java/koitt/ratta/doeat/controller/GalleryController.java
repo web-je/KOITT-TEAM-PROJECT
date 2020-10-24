@@ -16,7 +16,7 @@ public class GalleryController {
 	@GetMapping("gallery")
 	public String viewAllGallery(Model model) {
 		model.addAttribute("gallery", service.viewAll());
-		return "gallery";
+		return "galleryList";
 	}
 	
 	@GetMapping("gallery_like")

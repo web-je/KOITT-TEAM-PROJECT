@@ -19,24 +19,12 @@ public class GalleryServiceImpl implements GalleryService{
 		return dao.viewAll();
 	}
 	
-//	@Override
-//	public int addLike(int gIdx) {
-//		int result = dao.addLike(gIdx);	
-//		if (result != 1) {
-//			return false;
-//		}
-//		return true;
-//	}
-//	
-//	@Override
-//	public int viewLike(int gIdx) {
-//		return dao.viewLike(gIdx);
-//	}
-	
 	@Override
 	public int addLike(int gIdx) {
-		dao.addLike(gIdx);
-		
+		int result = dao.addLike(gIdx);	
+		if (result != 1) {
+			return 0;
+		}
 		return dao.viewLike(gIdx);
 	}
 
