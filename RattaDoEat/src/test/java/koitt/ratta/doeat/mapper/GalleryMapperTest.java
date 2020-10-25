@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import koitt.ratta.doeat.mapper.GalleryMapper;
-
 @SpringBootTest
 public class GalleryMapperTest {
 	
@@ -18,12 +16,14 @@ public class GalleryMapperTest {
 	public void viewAllTest() {
 		assertThat(galleryMapper.viewAll()
 								.get(0)
-								.getContent()).isEqualTo("content");
+								.getContent()).isEqualTo("content1");
 	}
 	
 	@Test
 	public void addLikeTest() {
-		assertThat(galleryMapper.addLike(1)).isEqualTo(1);
+		assertThat(galleryMapper.addLike(1))
+		// 결과가 1이면 업데이트 성공
+		.isEqualTo(1);
 	}
 	
 	@Test

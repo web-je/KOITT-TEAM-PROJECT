@@ -22,10 +22,11 @@ public class GalleryServiceImpl implements GalleryService{
 	@Override
 	public int addLike(int gIdx) {
 		int result = dao.addLike(gIdx);	
-		if (result != 1) {
-			return 0;
+		System.out.println("@@@@@@@@@@" + result);
+		if (result == 1) {
+			return dao.viewLike(gIdx);
 		}
-		return dao.viewLike(gIdx);
+		return 0;
 	}
 
 }

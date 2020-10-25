@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import koitt.ratta.doeat.service.GalleryService;
 
@@ -20,8 +21,9 @@ public class GalleryController {
 	}
 	
 	@GetMapping("gallery_like")
-	public int addLike(int gIdx) {
-		return service.addLike(gIdx);
+	public @ResponseBody int addLike(int gIdx) {
+		int result = service.addLike(gIdx);
+		return result;
 	}
 
 }
