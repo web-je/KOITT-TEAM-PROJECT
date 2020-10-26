@@ -18,5 +18,14 @@ public class GalleryServiceImpl implements GalleryService{
 	public List<GalleryVo> viewAll() {
 		return dao.viewAll();
 	}
+	
+	@Override
+	public int addLike(int gIdx) {
+		int result = dao.addLike(gIdx);	
+		if (result == 1) {
+			return dao.viewLike(gIdx);
+		}
+		return 0;
+	}
 
 }

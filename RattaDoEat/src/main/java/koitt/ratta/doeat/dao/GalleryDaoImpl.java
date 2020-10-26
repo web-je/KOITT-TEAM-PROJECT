@@ -13,10 +13,22 @@ public class GalleryDaoImpl implements GalleryDao{
 	
 	@Autowired
 	private SqlSession sqlSession;
+	
+	String galleryPath = "koitt.ratta.doeat.mapper.GalleryMapper.";
 
 	@Override
 	public List<GalleryVo> viewAll() {
-		return sqlSession.selectList("koitt.ratta.doeat.mapper.GalleryMapper.viewAll");
+		return sqlSession.selectList(galleryPath + "viewAll");
+	}
+	
+	@Override
+	public int addLike(int gIdx) {
+		return sqlSession.update(galleryPath + "addLike", gIdx);
+	}
+	
+	@Override
+	public int viewLike(int gIdx) {
+		return sqlSession.selectOne(galleryPath + "viewLike", gIdx);
 	}
 
 }

@@ -10,23 +10,26 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GalleryVo {
 
-	int gIdx, uIdx, hit, likeNum, scrapNum;
+	int gIdx;
+	int uIdx;
 	String content;
-	LocalDateTime regDate, modifyDate;
+	LocalDateTime regDate;
+	LocalDateTime modifyDate;
+	int hit;
+	int likeNum;
+	int scrapNum;
 	
 	@Builder
-	public GalleryVo(int gIdx, int uIdx, int hit, int likeNum, int scrapNum, String content, LocalDateTime regDate,
-			LocalDateTime modifyDate) {
+	public GalleryVo(int gIdx, int uIdx, String content, LocalDateTime regDate, LocalDateTime modifyDate, int hit,
+			int likeNum, int scrapNum) {
 		this.gIdx = gIdx;
 		this.uIdx = uIdx;
-		this.hit = hit;
-		this.likeNum = likeNum;
-		this.scrapNum = scrapNum;
 		this.content = content;
 		this.regDate = regDate;
 		this.modifyDate = modifyDate;
+		this.hit = hit;
+		this.likeNum = likeNum;
+		this.scrapNum = scrapNum;
 	}
-	
-	
 	
 }
