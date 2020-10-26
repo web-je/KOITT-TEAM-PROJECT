@@ -20,6 +20,5 @@ public class GalleryController {
 		model.addAttribute("gallery", service.viewAll());
 		return "galleryList";
 	}
-	
 
 }

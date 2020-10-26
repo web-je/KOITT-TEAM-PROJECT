@@ -3,30 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <title>갤러리 목록</title>
-<script defer src=""></script>
+<script defer src="/js/gallery/postAction.js"></script>
+<!-- <script defer src="/js/gallery/postFilter.js"></script> -->
+<script defer src="/js/gallery/postSort.js"></script>
 </head>
 <body>
 
-	<form action="">
-		<div style="display: none">
-			<input type="checkbox" id="filter1"/>
-			<input type="checkbox" id="filter2"/>
-			<input type="checkbox" id="filter3"/>
-			<input type="checkbox" id="filter4"/>
+	<div>
+		<div style="display:none">
+			<input type="checkbox" class="filter" id="type1" value="1"/>
+			<input type="checkbox" class="filter" id="type2" value="2"/>
+			<input type="checkbox" class="filter" id="type3" value="3"/>
+			<input type="checkbox" class="filter" id="type4" value="4"/>
+			<input type="checkbox" id="isVegan" value="5"/>
 		</div>
 		<div>
-			<label for="filter1">filter1</label>
-			<label for="filter2">filter2</label>
-			<label for="filter3">filter3</label>
-			<label for="filter4">filter4</label>
+			<label for="type1">type1</label>
+			<label for="type2">type2</label>
+			<label for="type3">type3</label>
+			<label for="type4">type4</label>
+			<label for="isVegan">isVegan</label>
 		</div>
-	</form>
+	</div>
+	
+	<div>
+		<div style="display:none">
+			<input type="checkbox" class="filter" id="type1" value="1"/>
+			<input type="checkbox" class="filter" id="type2" value="2"/>
+			<input type="checkbox" class="filter" id="type3" value="3"/>
+			<input type="checkbox" class="filter" id="type4" value="4"/>
+			<input type="checkbox" id="isVegan" value="5"/>
+		</div>
+		<div>
+			<label for="type1">type1</label>
+			<label for="type2">type2</label>
+			<label for="type3">type3</label>
+			<label for="type4">type4</label>
+			<label for="isVegan">isVegan</label>
+		</div>
+	</div>
 	
 	<div class="wrap">
 		<span th:onclick="sort('hit')">조회수순으로 정렬/</span>
 		<span th:onclick="sort('like_num')">좋아요순으로 정렬/</span>
-		<span th:onclick="sort('scrap_num')">스크랩순으로 정렬</span>
+		<span th:onclick="sort('scrap_num')">스크랩순으로 정렬/</span>
+		<span th:onclick="sort('reg_date')">최근등록순으로 정렬</span>
 	</div>
+	
 	<div class="wrap" id="galList">
 		<div th:each = "post : ${gallery}">
 			<span>[[${post.gIdx}]]</span>
@@ -38,74 +61,4 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
-
-	function like(gIdx) {
-		console.log(`-- request to send -- post ${gIdx} like +1`);
-		
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', '/gallery_like?gIdx=' + gIdx, true);
-		
-		xhr.onload = function() {
-			console.log(this);
-			if (this.readyState == 4 && this.status == 200) {
-				if (this.response == 0){	// 실패
-					return;
-				}else{	// 성공
-					document.querySelector(`#likeNum${gIdx}`).textContent = this.response;
-				}
-			}
-		}
-		
-		xhr.onerror = function() {
-			console.log(this);
-		}
-		
-		xhr.send();
-	}
-
-	function scrap(gIdx) {
-		console.log(`-- request to send -- post ${gIdx} scarp +1`);
-		
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', '/gallery_scrap?gIdx=' + gIdx, true);
-		
-		xhr.onload = function() {
-			console.log(this);
-			if (this.readyState == 4 && this.status == 200) {
-				if (this.response == 0){	// 실패
-					return;
-				}else{	// 성공
-					document.querySelector(`#scrapNum${gIdx}`).textContent = this.response;
-				}
-			}
-		}
-		
-		xhr.onerror = function() {
-			console.log(this);
-		}
-		
-		xhr.send();
-	}
-	
-	function sort(column) {
-		console.log(`-- sort by ${column}`);
-		
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', '/sort_by?column=' + column, true);
-		
-		xhr.onload = function() {
-			console.log(this);
-			if (this.readyState == 4 && this.status == 200) {
-				document.querySelector('#galList').outerHTML = this.response;
-			}
-		}
-		xhr.onerror = function() {
-			console.log(this);
-		}
-		
-		xhr.send();
-	}
-	
-</script>
 </html>
