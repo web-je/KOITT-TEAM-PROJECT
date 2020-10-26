@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>갤러리 목록</title>
+</head>
+<body>
+	<div class="wrap" id="galList">
+		<div th:each = "gallery : ${gallery}">
+			<span th:text = "${gallery.gIdx}"></span>
+			<span th:text = "${gallery.content}"></span>
+		</div>
+		<div>
+			<input type="button" value="글쓰기" onclick="location.href='g_insert';" /> 
+		</div>
+	</div>
+</body>
+</html>
