@@ -6,6 +6,22 @@
 <script defer src=""></script>
 </head>
 <body>
+
+	<form action="">
+		<div style="display: none">
+			<input type="checkbox" id="filter1"/>
+			<input type="checkbox" id="filter2"/>
+			<input type="checkbox" id="filter3"/>
+			<input type="checkbox" id="filter4"/>
+		</div>
+		<div>
+			<label for="filter1">filter1</label>
+			<label for="filter2">filter2</label>
+			<label for="filter3">filter3</label>
+			<label for="filter4">filter4</label>
+		</div>
+	</form>
+	
 	<div class="wrap">
 		<span th:onclick="sort('hit')">조회수순으로 정렬/</span>
 		<span th:onclick="sort('like_num')">좋아요순으로 정렬/</span>
