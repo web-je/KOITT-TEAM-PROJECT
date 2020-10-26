@@ -21,7 +21,6 @@ public class SortController {
 	@GetMapping("sort_by")
 	public @ResponseBody List<GalleryVo> sortBy(String column, Model model) {
 		model.addAttribute("sort", column);
-		System.out.println(service.sortBy(column).get(0).getContent());
 		return service.sortBy(column);
 	}
 
