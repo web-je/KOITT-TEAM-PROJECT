@@ -31,18 +31,6 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-	
-	// 2020-10-23 추가
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	
-	// 파일 업로드 관련(2020-10-25 추가)
-	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
-	// https://mvnrepository.com/artifact/commons-io/commons-io
-	compile group: 'commons-io', name: 'commons-io', version: '2.5'
-	
-	
-	
 }
 
 test {
