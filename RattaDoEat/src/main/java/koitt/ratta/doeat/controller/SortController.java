@@ -1,14 +1,10 @@
 package koitt.ratta.doeat.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import koitt.ratta.doeat.domain.GalleryVo;
 import koitt.ratta.doeat.service.SortService;
 
 @Controller
@@ -19,9 +15,8 @@ public class SortController {
 	
 	// 갤러리 정렬
 	@GetMapping("sort_by")
-	public @ResponseBody List<GalleryVo> sortBy(String column, Model model) {
-		model.addAttribute("sort", column);
-		return service.sortBy(column);
+	public String sortBy(String column, Model model) {
+		model.addAttribute("gallery", service.sortBy(column));
+		return "galleryList :: #galList";
 	}
-
 }
