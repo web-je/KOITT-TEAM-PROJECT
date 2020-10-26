@@ -1,5 +1,6 @@
 package koitt.ratta.doeat.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,6 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	}
 	
 	//테스트용 인메모리 유저, 어드민 데이터
+	@Bean
 	@Override
 	protected UserDetailsService userDetailsService() {
 		UserDetails user = 

@@ -8,6 +8,7 @@
 <body>
 <div th:insert="layout/header"></div>
 	<h1>메인 홈 "/", "/home"</h1>
-	<p>security 테스트 hello페이지<a th:href="@{/hello}">클릭</a>security가 가로채서 로그인으로 보냄, 로그인하면 접속 가능</p>
+	<p>security 테스트 hello페이지 <a th:href="@{/hello}">클릭</a> 로그인하면 접속 가능</p>
+		<h3 th:text="${hello}"> 컨트롤러 model param값 넘어오는지 확인.</h3>
 </body>
 </html>

@@ -18,8 +18,11 @@ public class MemberController {
 	}
 	@RequestMapping("home")
 	public String main2(Model model) {
-		model.addAttribute("hello", "model 안녕하세요.");
 		return "/home";
+	}
+	@RequestMapping("hello")
+	public String goHello(Model model) {
+		return "hello";
 	}
 	
 	//로그인 페이지 이동
@@ -46,25 +49,24 @@ public class MemberController {
 	//가입
 	@RequestMapping("join.do")
 	public String doJoin() {
-			
 		return "auth/userinfo"; //환영, user info 폼 이동
 	}
 		
 	//아이디 찾기 폼 이동
 	@RequestMapping("userFindId.go")
 	public String userFindIdGo (Model model) {
-		return "login/userFindId";
+		return "auth/userFindId";
 	}
 		
 	//비밀번호 찾기 폼 이동 	
 	@RequestMapping("userFindPw.go")
 	public String userFindIdPw (Model model) {
-		return "login/userFindPw";
+		return "auth/userFindPw";
 	}	
 	
 	//로그인 에러 
-	@RequestMapping("loginError")
-	public String loginErrorGo(Model model, String userId) {
+	@RequestMapping("/error2")
+	public String loginErrorGo(Model model) {
 		return "error/error";
 	}	
 }

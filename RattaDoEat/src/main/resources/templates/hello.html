@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -8,11 +9,12 @@
 <div th:insert="layout/header"></div>
 
 	<h1>"hello" 로 이동된 페이지.</h1>
-	<h3 th:text="${hello}"> 컨트롤러 model param값 넘어오는지 확인.</h3>
-	<p th:text="${hello}"></p>
+
+
 	접속 테스트 페이지.
 	
-	<p th:inline="text">로그인된 유저이름 : [[${#httpServletRequest.remoteUser}]]</p>
+	
+	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 	<form th:action="@{/logout}" method="post">
 		<input type="submit" value="로그아웃">	
 		기본시큐리티설정 /login?logout 로 리디렉션

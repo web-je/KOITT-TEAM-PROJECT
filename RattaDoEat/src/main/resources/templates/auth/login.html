@@ -21,14 +21,14 @@
 	</div>
 			
 	<div class="card-body">
-		<form th:action="@{/login.do}" method="POST">
+		<form th:action="@{/login.go}" method="post">
 			<!-- name속성 이름으로 post이동 -->
 			<input type="text" id="username" name="username" placeholder="email"
 				class="form-control my-3 login-text" autofocus /> 
 			<input type="password" placeholder="Password" id="password" name="password"
 				class="form-control mb-3 login-text" />
 			<button class="btn btn-lg btn-success btn-block text-uppercase"
-				name="Submit" value="Login" type="Submit" th:text="로그인"></button>
+				name="Submit" type="Submit" th:text="로그인"></button>
 		</form>
 		
 		<form th:action="@{/join.go}" method="get">
@@ -36,6 +36,8 @@
 				type="Submit">회원가입</button>
 		</form>
 	</div>
+	<hr/>
+
 
 
 </body>

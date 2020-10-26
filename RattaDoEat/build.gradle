@@ -36,7 +36,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	
 	
-	//2020-10-26 사용자:GW 추가
+	//GW 추가 2020-10-26
 		//Jquery Webjar
 	implementation group: 'org.webjars', name: 'jquery', version: '3.5.1'
 		//security
