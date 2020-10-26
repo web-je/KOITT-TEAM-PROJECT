@@ -34,6 +34,21 @@ dependencies {
 	
 	// 2020-10-23 추가
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	
+	
+	//2020-10-26 사용자:GW 추가
+		//Jquery Webjar
+	implementation group: 'org.webjars', name: 'jquery', version: '3.5.1'
+		//security
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	   // log4jdbc
+    implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+    implementation "org.logback-extensions:logback-ext-spring:0.1.2"
+	implementation files("${System.properties['java.home']}/../lib/tools.jar")	
+	
+	
 }
 
 test {

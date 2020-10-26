@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>로그인</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+</head>
+
+<body>
+	<h3>"login.go" 로 이동된 페이지.</h3>
+
+	<div th:if="${param.error}">
+		<p>로그인 실패시 /login?error 리디렉션.</p>
+		실패. 이메일, 비밀번호를 확인하세요. 
+	</div>
+	<div th:if="${param.logout}">
+		로그아웃 하셨습니다.
+	</div>
+			
+	<div class="card-body">
+		<form th:action="@{/login.do}" method="POST">
+			<!-- name속성 이름으로 post이동 -->
+			<input type="text" id="username" name="username" placeholder="email"
+				class="form-control my-3 login-text" autofocus /> 
+			<input type="password" placeholder="Password" id="password" name="password"
+				class="form-control mb-3 login-text" />
+			<button class="btn btn-lg btn-success btn-block text-uppercase"
+				name="Submit" value="Login" type="Submit" th:text="로그인"></button>
+		</form>
+		
+		<form th:action="@{/join.go}" method="get">
+			<button class="btn btn-lg btn-success btn-block text-uppercase"
+				type="Submit">회원가입</button>
+		</form>
+	</div>
+
+
+</body>
+</html>

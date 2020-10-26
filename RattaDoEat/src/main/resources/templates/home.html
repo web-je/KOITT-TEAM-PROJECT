@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<div th:insert="layout/header"></div>
+	<h1>메인 홈 "/", "/home"</h1>
+	<p>security 테스트 hello페이지<a th:href="@{/hello}">클릭</a>security가 가로채서 로그인으로 보냄, 로그인하면 접속 가능</p>
+</body>
+</html>

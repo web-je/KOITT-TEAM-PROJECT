@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div th:insert="layout/header"></div>
+
+	<h1>"hello" 로 이동된 페이지.</h1>
+	<h3 th:text="${hello}"> 컨트롤러 model param값 넘어오는지 확인.</h3>
+	<p th:text="${hello}"></p>
+	접속 테스트 페이지.
+	
+	<p th:inline="text">로그인된 유저이름 : [[${#httpServletRequest.remoteUser}]]</p>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="로그아웃">	
+		기본시큐리티설정 /login?logout 로 리디렉션
+	</form>
+	
+</body>
+</html>
