@@ -5,18 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import koitt.ratta.doeat.dao.GalleryDao;
 import koitt.ratta.doeat.domain.GalleryVo;
 
 @Service
-public class GalleryServiceImpl implements GalleryService{
+public class SortServiceImpl implements SortService{
 	
 	@Autowired
-	GalleryDao dao;
+	SortService dao;
 	
 	@Override
-	public List<GalleryVo> viewAll() {
-		return dao.viewAll();
+	public List<GalleryVo> sortBy(String column) {
+		return dao.sortBy(column);
 	}
-	
+
 }

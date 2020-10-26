@@ -4,8 +4,8 @@ import java.util.List;
 
 import koitt.ratta.doeat.domain.GalleryVo;
 
-public interface GalleryService {
+public interface SortService {
 
-	List<GalleryVo> viewAll();
+	List<GalleryVo> sortBy(String column);
 
 }

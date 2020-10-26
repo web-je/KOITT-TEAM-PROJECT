@@ -3,14 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>갤러리 목록</title>
+<script defer src=""></script>
 </head>
 <body>
+	<div class="wrap">
+		<span th:onclick="sort('hit')">조회수순으로 정렬/</span>
+		<span th:onclick="sort('like_num')">좋아요순으로 정렬/</span>
+		<span th:onclick="sort('scrap_num')">스크랩순으로 정렬</span>
+	</div>
 	<div class="wrap" id="galList">
 		<div th:each = "post : ${gallery}">
 			<span>[[${post.gIdx}]]</span>
 			<span>[[${post.content}]]</span>
-			<span th:onclick = "like([[${post.gIdx}]])">like</span>
+			<span th:onclick="like([[${post.gIdx}]])">like</span>
 			<span th:id="likeNum + ${post.gIdx}">[[${post.likeNum}]]</span>
+			<span th:onclick="scrap([[${post.gIdx}]])">scrap</span>
+			<span th:id="scrapNum + ${post.gIdx}">[[${post.scrapNum}]]</span>
 		</div>
 	</div>
 </body>
@@ -23,7 +31,7 @@
 		xhr.open('GET', '/gallery_like?gIdx=' + gIdx, true);
 		
 		xhr.onload = function() {
-			console.log(this)
+			console.log(this);
 			if (this.readyState == 4 && this.status == 200) {
 				if (this.response == 0){	// 실패
 					return;
@@ -33,6 +41,49 @@
 			}
 		}
 		
+		xhr.onerror = function() {
+			console.log(this);
+		}
+		
+		xhr.send();
+	}
+
+	function scrap(gIdx) {
+		console.log(`-- request to send -- post ${gIdx} scarp +1`);
+		
+		let xhr = new XMLHttpRequest();
+		xhr.open('GET', '/gallery_scrap?gIdx=' + gIdx, true);
+		
+		xhr.onload = function() {
+			console.log(this);
+			if (this.readyState == 4 && this.status == 200) {
+				if (this.response == 0){	// 실패
+					return;
+				}else{	// 성공
+					document.querySelector(`#scrapNum${gIdx}`).textContent = this.response;
+				}
+			}
+		}
+		
+		xhr.onerror = function() {
+			console.log(this);
+		}
+		
+		xhr.send();
+	}
+	
+	function sort(column) {
+		console.log(`-- sort by ${column}`);
+		
+		let xhr = new XMLHttpRequest();
+		xhr.open('GET', '/sort_by?column=' + column, true);
+		
+		xhr.onload = function() {
+			console.log(this);
+			if (this.readyState == 4 && this.status == 200) {
+				let galList = JSON.parse(this.response);
+			}
+		}
 		xhr.onerror = function() {
 			console.log(this);
 		}

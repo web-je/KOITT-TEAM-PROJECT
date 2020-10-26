@@ -9,16 +9,16 @@ import org.springframework.stereotype.Repository;
 import koitt.ratta.doeat.domain.GalleryVo;
 
 @Repository
-public class GalleryDaoImpl implements GalleryDao{
+public class SortDaoImpl implements SortDao{
 	
 	@Autowired
 	private SqlSession sqlSession;
 	
-	String path = "koitt.ratta.doeat.mapper.GalleryMapper.";
+	String path = "koitt.ratta.doeat.mapper.SortMapper.";
 
 	@Override
-	public List<GalleryVo> viewAll() {
-		return sqlSession.selectList(path + "viewAll");
+	public List<GalleryVo> sortBy(String column){
+		return sqlSession.selectList(path + "sortBy", column);
 	}
-	
+
 }

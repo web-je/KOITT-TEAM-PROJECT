@@ -8,9 +8,11 @@ import org.apache.ibatis.annotations.Select;
 import koitt.ratta.doeat.domain.GalleryVo;
 
 @Mapper
-public interface GalleryMapper {
+public interface SortMapper {
 	
-	@Select("SELECT * FROM com_gallery")
-	public List<GalleryVo> viewAll();
-	
+	@Select("SELECT *"
+			+ " FROM com_gallery"
+			+ " ORDER BY ${column} DESC")
+	public List<GalleryVo> sortBy(String column);
+
 }

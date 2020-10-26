@@ -34,11 +34,18 @@ public class GalleryControllerTest {
 	}
 	
 	@Test
-	public void likeTest() throws Exception{
+	public void likeTest() throws Exception {
 		
 		mockMvc.perform(get("/gallery_like"))
 			   .andDo(print());
 		
+	}
+	
+	@Test
+	public void scarpTest() throws Exception {
+		
+		mockMvc.perform(get("/gallery_scarp"))
+			   .andDo(print());
 	}
 	
 }
