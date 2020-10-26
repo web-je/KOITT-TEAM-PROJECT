@@ -23,12 +23,12 @@ public class GalleryDaoImpl implements GalleryDao{
 	
 	@Override
 	public int addLike(int gIdx) {
-		return sqlSession.update(galleryPath + "addLike");
+		return sqlSession.update(galleryPath + "addLike", gIdx);
 	}
 	
 	@Override
 	public int viewLike(int gIdx) {
-		return sqlSession.selectOne(galleryPath + "viewLike");
+		return sqlSession.selectOne(galleryPath + "viewLike", gIdx);
 	}
 
 }

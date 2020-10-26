@@ -16,7 +16,7 @@ public interface GalleryMapper {
 	
 	@Update("UPDATE com_gallery"
 			+ " SET LIKE_NUM = LIKE_NUM+1"
-			+ " WHERE G_IDX = #{gIdx, jdbcType=INTEGER}")
+			+ " WHERE G_IDX = #{gIdx}")
 	public int addLike(int gIdx);
 	
 	@Select("SELECT LIKE_NUM"

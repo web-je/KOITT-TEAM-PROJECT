@@ -22,7 +22,6 @@ public class GalleryServiceImpl implements GalleryService{
 	@Override
 	public int addLike(int gIdx) {
 		int result = dao.addLike(gIdx);	
-		System.out.println("@@@@@@@@@@" + result);
 		if (result == 1) {
 			return dao.viewLike(gIdx);
 		}

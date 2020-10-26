@@ -10,11 +10,12 @@
 			<span>[[${post.gIdx}]]</span>
 			<span>[[${post.content}]]</span>
 			<span th:onclick = "like([[${post.gIdx}]])">like</span>
-			<span>[[${post.likeNum}]]</span>
+			<span th:id="likeNum + ${post.gIdx}">[[${post.likeNum}]]</span>
 		</div>
 	</div>
 </body>
 <script type="text/javascript">
+
 	function like(gIdx) {
 		console.log(`-- request to send -- post ${gIdx} like +1`);
 		
@@ -22,7 +23,14 @@
 		xhr.open('GET', '/gallery_like?gIdx=' + gIdx, true);
 		
 		xhr.onload = function() {
-			console.log(this);
+			console.log(this)
+			if (this.readyState == 4 && this.status == 200) {
+				if (this.response == 0){	// 실패
+					return;
+				}else{	// 성공
+					document.querySelector(`#likeNum${gIdx}`).textContent = this.response;
+				}
+			}
 		}
 		
 		xhr.onerror = function() {
