@@ -15,8 +15,14 @@ public class FilterServiceImpl implements FilterService {
 	FilterDao dao;
 
 	@Override
-	public List<GalleryVo> addFilter(String type) {
-		return dao.addFilter(type);
+	public List<GalleryVo> addFilter(String[] types) {
+		String typesForSQL = "TYPE1 LIKE '%" + types[0] + "%'";
+		
+		for(int i=1; i<types.length; i++) {
+			typesForSQL += " OR TYPE1 LIKE '%" + types[i] + "%'";
+		}
+		
+		return dao.addFilter(typesForSQL);
 	}
 
 }

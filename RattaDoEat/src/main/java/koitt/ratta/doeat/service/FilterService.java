@@ -6,6 +6,6 @@ import koitt.ratta.doeat.domain.GalleryVo;
 
 public interface FilterService {
 
-	List<GalleryVo> addFilter(String type);
+	List<GalleryVo> addFilter(String[] types);
 
 }

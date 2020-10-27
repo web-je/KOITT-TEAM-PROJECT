@@ -12,7 +12,7 @@ public interface FilterMapper {
 	
 	@Select("SELECT *"
 			+ " FROM com_gallery"
-			+ " WHERE TYPE1=#{type}")
-	public List<GalleryVo> addFilter(String type);
+			+ " WHERE ${typesForSQL}")
+	public List<GalleryVo> addFilter(String typesForSQL);
 
 }

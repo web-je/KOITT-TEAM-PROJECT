@@ -6,6 +6,6 @@ import koitt.ratta.doeat.domain.GalleryVo;
 
 public interface FilterDao {
 
-	List<GalleryVo> addFilter(String type);
+	List<GalleryVo> addFilter(String typesForSQL);
 
 }

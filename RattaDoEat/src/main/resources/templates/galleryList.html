@@ -4,27 +4,29 @@
 <meta charset="UTF-8">
 <title>갤러리 목록</title>
 <script defer src="/js/gallery/postAction.js"></script>
-<!-- <script defer src="/js/gallery/postFilter.js"></script> -->
+<script defer src="/js/gallery/postFilter.js"></script>
 <script defer src="/js/gallery/postSort.js"></script>
 </head>
 <body>
 
+	<!-- filter1 : type1 필터 -->
+
 	<div>
-		<div style="display:none">
-			<input type="checkbox" class="filter" id="type1" value="1"/>
-			<input type="checkbox" class="filter" id="type2" value="2"/>
-			<input type="checkbox" class="filter" id="type3" value="3"/>
-			<input type="checkbox" class="filter" id="type4" value="4"/>
-			<input type="checkbox" id="isVegan" value="5"/>
+		<div style="display:none" id="filter1">
+			<input type="checkbox" class="filter1" id="filter1_1" value="한식" checked/>
+			<input type="checkbox" class="filter1" id="filter1_2" value="중식" checked/>
+			<input type="checkbox" class="filter1" id="filter1_3" value="양식" checked/>
+			<input type="checkbox" class="filter1" id="filter1_4" value="일식" checked/>
 		</div>
 		<div>
-			<label for="type1">type1</label>
-			<label for="type2">type2</label>
-			<label for="type3">type3</label>
-			<label for="type4">type4</label>
-			<label for="isVegan">isVegan</label>
+			<label for="filter1_1">한식</label>
+			<label for="filter1_2">중식</label>
+			<label for="filter1_3">양식</label>
+			<label for="filter1_4">일식</label>
 		</div>
 	</div>
+	
+	<!-- filter2 : type2 필터 -->
 	
 	<div>
 		<div style="display:none">
@@ -32,13 +34,20 @@
 			<input type="checkbox" class="filter" id="type2" value="2"/>
 			<input type="checkbox" class="filter" id="type3" value="3"/>
 			<input type="checkbox" class="filter" id="type4" value="4"/>
-			<input type="checkbox" id="isVegan" value="5"/>
 		</div>
 		<div>
 			<label for="type1">type1</label>
 			<label for="type2">type2</label>
 			<label for="type3">type3</label>
 			<label for="type4">type4</label>
+		</div>
+	</div>
+	
+	<div>
+		<div style="display:none">
+			<input type="checkbox" id="isVegan" value="5"/>
+		</div>
+		<div>
 			<label for="isVegan">isVegan</label>
 		</div>
 	</div>
@@ -60,5 +69,6 @@
 			<span th:id="scrapNum + ${post.gIdx}">[[${post.scrapNum}]]</span>
 		</div>
 	</div>
+	
 </body>
 </html>
