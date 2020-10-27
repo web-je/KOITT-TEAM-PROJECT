@@ -11,15 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 	
 	//기본 홈 이동
-	@RequestMapping("/")
+	@RequestMapping(value = {"/", "home"})
 	public String main(Model model) {
 		model.addAttribute("hello", "model 안녕하세요.");
 		return "/home";
 	}
-	@RequestMapping("home")
-	public String main2(Model model) {
-		return "/home";
-	}
+
 	@RequestMapping("hello")
 	public String goHello(Model model) {
 		return "hello";
