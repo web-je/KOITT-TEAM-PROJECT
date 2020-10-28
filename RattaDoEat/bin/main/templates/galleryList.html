@@ -59,6 +59,8 @@
 		<span th:onclick="sort('reg_date')">최근등록순으로 정렬</span>
 	</div>
 	
+	[[${gLike}]]
+	
 	<div class="wrap" id="galList">
 		<div th:each = "post : ${gallery}">
 			<span>[[${post.gIdx}]]</span>
