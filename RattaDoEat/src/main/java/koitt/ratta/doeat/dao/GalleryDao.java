@@ -2,13 +2,10 @@ package koitt.ratta.doeat.dao;
 
 import java.util.List;
 
-import koitt.ratta.doeat.domain.GLikeVo;
-import koitt.ratta.doeat.domain.GalleryVo;
+import koitt.ratta.doeat.domain.GalleryJoinLikeVo;
 
 public interface GalleryDao {
 
-	List<GalleryVo> viewAll();
-
-	List<GLikeVo> countLike();
+	List<GalleryJoinLikeVo> viewAll();
 
 }
