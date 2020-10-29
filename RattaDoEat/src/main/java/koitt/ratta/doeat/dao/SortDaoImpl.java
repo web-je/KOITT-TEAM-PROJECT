@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import koitt.ratta.doeat.domain.GalleryVo;
+import koitt.ratta.doeat.domain.GalleryListVo;
 
 @Repository
 public class SortDaoImpl implements SortDao{
@@ -17,7 +17,7 @@ public class SortDaoImpl implements SortDao{
 	String path = "koitt.ratta.doeat.mapper.SortMapper.";
 
 	@Override
-	public List<GalleryVo> sortBy(String column){
+	public List<GalleryListVo> sortBy(String column){
 		return sqlSession.selectList(path + "sortBy", column);
 	}
 

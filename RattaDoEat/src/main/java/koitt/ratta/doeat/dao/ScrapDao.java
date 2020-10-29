@@ -1,9 +1,9 @@
 package koitt.ratta.doeat.dao;
 
+import koitt.ratta.doeat.domain.GalleryScrapVo;
+
 public interface ScrapDao {
 
-	int addScrap(int gIdx);
-
-	int viewScrap(int gIdx);
+	int addScrap(GalleryScrapVo galleryScrapVo);
 
 }

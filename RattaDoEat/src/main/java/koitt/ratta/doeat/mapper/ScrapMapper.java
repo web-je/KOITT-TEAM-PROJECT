@@ -1,20 +1,15 @@
 package koitt.ratta.doeat.mapper;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+
+import koitt.ratta.doeat.domain.GalleryScrapVo;
 
 @Mapper
 public interface ScrapMapper {
 	
-	@Update("UPDATE com_gallery"
-			+ " SET SCRAP_NUM = SCRAP_NUM+1"
-			+ " WHERE G_IDX = #{gIdx}")
-	public int addScrap(int gIdx);
-	
-	@Select("SELECT SCRAP_NUM"
-			+ " FROM com_gallery"
-			+ " WHERE G_IDX = #{gIdx}")
-	public int viewScrap(int gIdx);
+	@Insert("INSERT INTO gallery_scrap"
+			+ " VALUES(g_s_idx_seq.NEXTVAL, #{uIdx}, #{gIdx})")
+	public int addScrap(GalleryScrapVo vo);
 
 }

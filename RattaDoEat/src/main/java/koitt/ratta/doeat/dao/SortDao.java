@@ -2,10 +2,10 @@ package koitt.ratta.doeat.dao;
 
 import java.util.List;
 
-import koitt.ratta.doeat.domain.GalleryVo;
+import koitt.ratta.doeat.domain.GalleryListVo;
 
 public interface SortDao {
 
-	List<GalleryVo> sortBy(String column);
+	List<GalleryListVo> sortBy(String column);
 
 }

@@ -7,18 +7,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import koitt.ratta.doeat.domain.GalleryVo;
+import koitt.ratta.doeat.domain.GalleryListVo;
 
 @SpringBootTest
 public class GalleryMapperTest {
 	
 	@Autowired
 	GalleryMapper mapper;
-	GalleryVo testVo;
+	GalleryListVo testVo;
 	
 	@BeforeEach
 	public void setUp() {
-		testVo = GalleryVo.builder().content("test content").build();
+		testVo = GalleryListVo.builder().content("test content").build();
 	}
 	
 	@Test

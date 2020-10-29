@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import koitt.ratta.doeat.domain.GalleryVo;
+import koitt.ratta.doeat.domain.GalleryListVo;
 
 @Repository
 public class FilterDaoImpl implements FilterDao{
@@ -17,7 +17,7 @@ public class FilterDaoImpl implements FilterDao{
 	String path = "koitt.ratta.doeat.mapper.FilterMapper.";
 
 	@Override
-	public List<GalleryVo> addFilter(String typesForSQL) {
+	public List<GalleryListVo> addFilter(String typesForSQL) {
 		return sqlSession.selectList(path + "addFilter", typesForSQL);
 	}
 	

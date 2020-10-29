@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import koitt.ratta.doeat.dao.FilterDao;
-import koitt.ratta.doeat.domain.GalleryVo;
+import koitt.ratta.doeat.domain.GalleryListVo;
 
 @Service
 public class FilterServiceImpl implements FilterService {
@@ -15,7 +15,7 @@ public class FilterServiceImpl implements FilterService {
 	FilterDao dao;
 
 	@Override
-	public List<GalleryVo> addFilter(String[] types) {
+	public List<GalleryListVo> addFilter(String[] types) {
 		String typesForSQL = "TYPE1 LIKE '%" + types[0] + "%'";
 		
 		for(int i=1; i<types.length; i++) {

@@ -4,6 +4,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import koitt.ratta.doeat.domain.GalleryLikeVo;
+
 @Repository
 public class LikeDaoImpl implements LikeDao {
 	
@@ -13,13 +15,7 @@ public class LikeDaoImpl implements LikeDao {
 	String path = "koitt.ratta.doeat.mapper.LikeMapper.";
 
 	@Override
-	public int addLike(int gIdx) {
-		return sqlSession.update(path + "addLike", gIdx);
+	public int addLike(GalleryLikeVo galleryLikeVo) {
+		return sqlSession.insert(path + "addLike", galleryLikeVo);
 	}
-	
-	@Override
-	public int viewLike(int gIdx) {
-		return sqlSession.selectOne(path + "viewLike", gIdx);
-	}
-
 }

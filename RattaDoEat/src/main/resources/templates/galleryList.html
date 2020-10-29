@@ -54,8 +54,8 @@
 	
 	<div class="wrap">
 		<span th:onclick="sort('hit')">조회수순으로 정렬/</span>
-		<span th:onclick="sort('like_num')">좋아요순으로 정렬/</span>
-		<span th:onclick="sort('scrap_num')">스크랩순으로 정렬/</span>
+		<span th:onclick="sort('like_cnt')">좋아요순으로 정렬/</span>
+		<span th:onclick="sort('scrap_cnt')">스크랩순으로 정렬/</span>
 		<span th:onclick="sort('reg_date')">최근등록순으로 정렬</span>
 	</div>
 	<div class="wrap" id="galList">
@@ -63,9 +63,9 @@
 			<span>[[${post.gIdx}]]</span>
 			<span>[[${post.content}]]</span>
 			<span th:onclick="like([[${post.gIdx}]])">like</span>
-			<span th:id="likeNum + ${post.gIdx}">[[${post.like}]]</span>
+			<span>[[${post.likeCnt}]]</span>
 			<span th:onclick="scrap([[${post.gIdx}]])">scrap</span>
-			<span th:id="scrapNum + ${post.gIdx}">[[${post.scrapNum}]]</span>
+			<span>[[${post.scrapCnt}]]</span>
 		</div>
 	</div>
 	

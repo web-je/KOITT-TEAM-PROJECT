@@ -1,9 +1,9 @@
 package koitt.ratta.doeat.dao;
 
+import koitt.ratta.doeat.domain.GalleryLikeVo;
+
 public interface LikeDao {
 
-	int addLike(int gIdx);
-
-	int viewLike(int gIdx);
+	int addLike(GalleryLikeVo galleryLikeVo);
 
 }

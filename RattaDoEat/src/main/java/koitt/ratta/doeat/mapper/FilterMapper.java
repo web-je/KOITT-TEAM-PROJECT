@@ -5,14 +5,14 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import koitt.ratta.doeat.domain.GalleryVo;
+import koitt.ratta.doeat.domain.GalleryListVo;
 
 @Mapper
 public interface FilterMapper {
 	
 	@Select("SELECT *"
-			+ " FROM com_gallery"
+			+ " FROM gallery_list"
 			+ " WHERE ${typesForSQL}")
-	public List<GalleryVo> addFilter(String typesForSQL);
+	public List<GalleryListVo> addFilter(String typesForSQL);
 
 }
