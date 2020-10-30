@@ -6,4 +6,6 @@ public interface LikeDao {
 
 	int addLike(GalleryLikeVo galleryLikeVo);
 
+	int viewLike(int gIdx);
+
 }

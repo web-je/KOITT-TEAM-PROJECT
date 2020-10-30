@@ -6,4 +6,6 @@ public interface ScrapDao {
 
 	int addScrap(GalleryScrapVo galleryScrapVo);
 
+	int viewScrap(int gIdx);
+
 }

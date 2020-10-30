@@ -17,9 +17,11 @@ public class FilterController {
 	FilterService service;
 	
 	// 갤러리 필터
-	@PostMapping("add_filter")
-	public String addFilter(@RequestBody Map<String, String[]> types, Model model) {
-		model.addAttribute("gallery", service.addFilter(types.get("types")));
+	@PostMapping("filter_on")
+	public String filterType1(@RequestBody Map<String, String[]> types, Model model) {
+		System.out.println(model.getAttribute("gallery"));
+		model.addAttribute("gallery", service.changeFilter(types));
 		return "galleryList :: #galList";
 	}
+	
 }

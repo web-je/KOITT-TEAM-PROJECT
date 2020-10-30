@@ -1,13 +1,10 @@
 package koitt.ratta.doeat.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import koitt.ratta.doeat.dao.GalleryDao;
 import koitt.ratta.doeat.dao.ScrapDao;
-import koitt.ratta.doeat.domain.GalleryListVo;
 import koitt.ratta.doeat.domain.GalleryScrapVo;
 
 @Service
@@ -20,9 +17,14 @@ public class ScrapServiceImpl implements ScrapService{
 	GalleryDao galleryDao;
 
 	@Override
-	public List<GalleryListVo> addScrap(GalleryScrapVo galleryScrapVo) {
-		scrapDao.addScrap(galleryScrapVo);	
-		return galleryDao.viewAll();
+	public int addScrap(GalleryScrapVo galleryScrapVo) {
+		int result = scrapDao.addScrap(galleryScrapVo);
+		
+		if (result == 0) {
+			return 0;
+		}
+		
+		return scrapDao.viewScrap(galleryScrapVo.getGIdx());
 	}
 
 }

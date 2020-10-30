@@ -4,98 +4,104 @@
  */
 
 /**
- * 인자값으로 전체 재조회 (단일 필터)
+ * 인자값으로 전체 재조회
  */
 
-function initFilter1(){
-	
-	console.log(`-- filter1 on`);
-	
-	const types = document.querySelectorAll('.filter1');
-	const filter = document.querySelector('#filter1');
-	
-	for (let type of types){
-		type.onchange = function(e) {
-			let checkedType = filter.querySelectorAll(':checked');
-			if (checkedType.length === 0) {
-				checkedType = document.querySelectorAll('.filter1');
-				checkAll(types);
-			}
-			addFilter(checkedType);
-		}
-	}
-	
-	function checkAll(types) {
-		for (let type of types) {
-			type.checked;
-		}
-	}
+const types1 = document.querySelectorAll('.filter1');
+const filter1 = document.querySelector('#filter1');
 
-	
-	function addFilter(checkedType) {
-		
-		let types = [];
-		for (let type of checkedType){
-			types.push(type.value);
-		}
-		console.log(`-- add filter ${types}`);
-		
-		let data = JSON.stringify({"types":types});
-		
-		let xhr = new XMLHttpRequest();
-		
-		xhr.open('POST', '/add_filter', true);
-		xhr.setRequestHeader('Content-Type', 'application/json');
-		
-		xhr.onload = function() {
-			if (this.readyState == 4 && this.status == 200){
-				document.querySelector('#galList').outerHTML = this.response;
-			}
-		}
-		xhr.onerror = function() {
-			console.log(this);
-		}
-		
-		xhr.send(data);
+const types2 = document.querySelectorAll('.filter2');
+const filter2 = document.querySelector('#filter2');
+
+let checkedType1 = filter1.querySelectorAll(':checked');
+let checkedType2 = filter2.querySelectorAll(':checked');
+
+let sortColumn = 'reg_date';
+
+function sort(column){
+	sortColumn = column;
+	sendFilter();
+}
+
+for (let type of types1){
+	type.onchange = function() {
+		filterEvent();
 	}
+}
+
+for (let type of types2){
+	type.onchange = function() {
+		filterEvent();
+	}
+}
+
+function filterEvent(){
+	
+	checkedType1 = filter1.querySelectorAll(':checked');
+	checkedType2 = filter2.querySelectorAll(':checked');
+	
+	if (checkedType1.length === 0) {
+		checkedType1 = document.querySelectorAll('.filter1');
+		checkAll(types1);
+	}
+	
+	sendFilter();
 	
 }
 
-initFilter1();
+function checkAll(types) {
+	for (let type of types) {
+		type.checked;
+	}
+}
 
-/**
- * 인자값으로 전체 재조회 (다중 필터)
- */
-
-function filter2() {
+function sendFilter() {
 	
-	const filter = document.querySelectorAll('.filter');
+	let types1 = [];
+	for (let type of checkedType1){
+		types1.push(type.value);
+	}	
 	
-	for (let type of filter){
-		type.onchange = function(e) {
-			console.log(e);
-	//		addFilter(this.value);
-		}
+	let types2 = [];
+	for (let type of checkedType2){
+		types2.push(type.value);
 	}
 	
-	function addFilter (type) {
-		console.log(`--add filter ${type}`);
+	if (types1.length == 0) {
+		types1.push("");
 		
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', '/add_filter?type=' + type, true);
-		
-		xhr.onlaod = function() {
-			console.log(this);
-			if (this.readyState == 4 && this.status == 200){
-				document.querySelector('#galList').outerHTML = this.response;
-			}
-		}
-		xhr.onerror = function() {
-			console.log(this);
-		}
-		
-		xhr.send();
 	}
-
+	
+	if (types2.length == 0) {
+		types2.push("");
+		
+	}
+	
+	let data = JSON.stringify({
+		"types1":types1,
+		"types2":types2,
+		"column":[sortColumn]
+		});
+	
+	let xhr = new XMLHttpRequest();
+	
+	xhr.open('POST', '/filter_on', true);
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	
+	xhr.onload = function() {
+		if (this.readyState == 4 && this.status == 200){
+		
+			console.log(`-- filter on ${types1} // ${types2}`);
+			console.log(`-- sort by ${sortColumn}`);
+			
+			document.querySelector('#galList').outerHTML = this.response;
+			console.log(gal);
+		}
+	}
+	xhr.onerror = function() {
+		console.log(this);
+	}
+	
+	xhr.send(data);
 	
 }

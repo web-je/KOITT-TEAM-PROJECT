@@ -19,7 +19,7 @@ public class FilterMapperTest {
 	
 	@Test
 	public void sortBy() {
-		List<GalleryListVo> list = mapper.addFilter("TYPE1 LIKE '%한식%'");
+		List<GalleryListVo> list = mapper.changeFilter("TYPE1 LIKE '%한식%'");
 
 		for(GalleryListVo post : list) {
 			assertEquals(post.getType1(), "한식");

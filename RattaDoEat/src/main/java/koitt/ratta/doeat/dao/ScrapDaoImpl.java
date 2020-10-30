@@ -19,5 +19,9 @@ public class ScrapDaoImpl implements ScrapDao{
 	public int addScrap(GalleryScrapVo galleryScrapVo) {
 		return sqlSession.update(path + "addScrap", galleryScrapVo);
 	}
-	
+
+	@Override
+	public int viewScrap(int gIdx) {
+		return sqlSession.selectOne(path + "viewScrap", gIdx);
+	}
 }

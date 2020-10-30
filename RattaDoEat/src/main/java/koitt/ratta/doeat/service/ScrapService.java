@@ -7,6 +7,6 @@ import koitt.ratta.doeat.domain.GalleryScrapVo;
 
 public interface ScrapService {
 
-	List<GalleryListVo> addScrap(GalleryScrapVo galleryScrapVo);
+	int addScrap(GalleryScrapVo galleryScrapVo);
 
 }

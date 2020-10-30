@@ -18,4 +18,9 @@ public class LikeDaoImpl implements LikeDao {
 	public int addLike(GalleryLikeVo galleryLikeVo) {
 		return sqlSession.insert(path + "addLike", galleryLikeVo);
 	}
+
+	@Override
+	public int viewLike(int gIdx) {
+		return sqlSession.selectOne(path + "viewLike", gIdx);
+	}
 }

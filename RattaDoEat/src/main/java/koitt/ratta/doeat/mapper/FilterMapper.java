@@ -12,7 +12,7 @@ public interface FilterMapper {
 	
 	@Select("SELECT *"
 			+ " FROM gallery_list"
-			+ " WHERE ${typesForSQL}")
-	public List<GalleryListVo> addFilter(String typesForSQL);
-
+			+ " ${typesForSQL} DESC")
+	public List<GalleryListVo> changeFilter(String typesForSQL);
+	
 }

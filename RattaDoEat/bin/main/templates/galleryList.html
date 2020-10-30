@@ -5,7 +5,6 @@
 <title>갤러리 목록</title>
 <script defer src="/js/gallery/postAction.js"></script>
 <script defer src="/js/gallery/postFilter.js"></script>
-<script defer src="/js/gallery/postSort.js"></script>
 </head>
 <body>
 
@@ -29,17 +28,15 @@
 	<!-- filter2 : type2 필터 -->
 	
 	<div>
-		<div style="display:none">
-			<input type="checkbox" class="filter" id="type1" value="1"/>
-			<input type="checkbox" class="filter" id="type2" value="2"/>
-			<input type="checkbox" class="filter" id="type3" value="3"/>
-			<input type="checkbox" class="filter" id="type4" value="4"/>
+		<div style="display:none" id="filter2">
+			<input type="checkbox" class="filter2" id="filter2_1" value="생선"/>
+			<input type="checkbox" class="filter2" id="filter2_2" value="채소"/>
+			<input type="checkbox" class="filter2" id="filter2_3" value="육류"/>
 		</div>
 		<div>
-			<label for="type1">type1</label>
-			<label for="type2">type2</label>
-			<label for="type3">type3</label>
-			<label for="type4">type4</label>
+			<label for="filter2_1">생선</label>
+			<label for="filter2_2">채소</label>
+			<label for="filter2_3">육류</label>
 		</div>
 	</div>
 	
@@ -58,14 +55,22 @@
 		<span th:onclick="sort('scrap_cnt')">스크랩순으로 정렬/</span>
 		<span th:onclick="sort('reg_date')">최근등록순으로 정렬</span>
 	</div>
+	<script th:inline="javascript">
+		let gal = "";
+	</script>
 	<div class="wrap" id="galList">
+		<script th:inline="javascript">
+			gal = [[${gallery}]];
+		</script>
 		<div th:each = "post : ${gallery}">
 			<span>[[${post.gIdx}]]</span>
 			<span>[[${post.content}]]</span>
 			<span th:onclick="like([[${post.gIdx}]])">like</span>
-			<span>[[${post.likeCnt}]]</span>
+			<span th:id="${'like_cnt' + post.gIdx}">[[${post.likeCnt}]]</span>
 			<span th:onclick="scrap([[${post.gIdx}]])">scrap</span>
-			<span>[[${post.scrapCnt}]]</span>
+			<span th:id="${'scrap_cnt' + post.gIdx}">[[${post.scrapCnt}]]</span>
+			<span>[[${post.type1}]]</span>
+			<span>[[${post.type2}]]</span>
 		</div>
 	</div>
 	

@@ -1,11 +1,12 @@
 package koitt.ratta.doeat.service;
 
 import java.util.List;
+import java.util.Map;
 
 import koitt.ratta.doeat.domain.GalleryListVo;
 
 public interface FilterService {
 
-	List<GalleryListVo> addFilter(String[] types);
+	List<GalleryListVo> changeFilter(Map<String, String[]> types);
 
 }

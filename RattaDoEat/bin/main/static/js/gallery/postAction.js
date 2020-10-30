@@ -17,7 +17,7 @@ function like(gIdx) {
 			if (this.response == 0){	// 실패
 				return;
 			}else{	// 성공
-				document.querySelector('#galList').outerHTML = this.response;
+				document.querySelector('#like_cnt'+gIdx).textContent = this.response;
 			}
 		}
 	}
@@ -43,7 +43,7 @@ function scrap(gIdx) {
 			if (this.response == 0){	// 실패
 				return;
 			}else{	// 성공
-				document.querySelector('#galList').outerHTML = this.response;
+				document.querySelector('#scrap_cnt'+gIdx).textContent = this.response;
 			}
 		}
 	}

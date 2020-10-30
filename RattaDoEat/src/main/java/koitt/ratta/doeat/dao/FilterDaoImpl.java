@@ -17,8 +17,8 @@ public class FilterDaoImpl implements FilterDao{
 	String path = "koitt.ratta.doeat.mapper.FilterMapper.";
 
 	@Override
-	public List<GalleryListVo> addFilter(String typesForSQL) {
-		return sqlSession.selectList(path + "addFilter", typesForSQL);
+	public List<GalleryListVo> changeFilter(String typesForSQL) {
+		return sqlSession.selectList(path + "changeFilter", typesForSQL);
 	}
 	
 }
