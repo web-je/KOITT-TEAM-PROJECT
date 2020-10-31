@@ -2,13 +2,46 @@
  * 2020-10-31
  * 작성자 : 진민영
  */
+ 
+/**
+ * url 복사
+ */
+ 
 function shareURL(gIdx) {
+
+	document.querySelector(`#shareURL${gIdx}`).style.display = 'none';
+	document.querySelector(`#shareKakao${gIdx}`).style.display = 'inline';
+	document.querySelector(`#copyURL${gIdx}`).style.display = 'inline';
+	
+}
+
+function shareKakao(gIdx) {
+
+	Kakao.Link.sendCustom({
+		templateId: 39719,
+		templateArgs: {
+			'userId':'testUser',
+			'likeCnt':'99999',
+			'shareImg':'img.jpeg',
+			'types':'#type1 #type2 #type3',
+			'gIdx':gIdx
+		}
+	});
+	
+//	Kakao.Link.sendScrap({
+//		requestUrl: 'https://www.naver.com'
+//	});
+	
+}
+
+ 
+function copyURL(gIdx) {
 
 	/**
 	 * 해당 글로 이동하는 url
 	 */
 	 
-	let url = document.querySelector('#goPost'+gIdx).href;
+	let url = document.querySelector(`#goPost${gIdx}`).href;
 	
 	
 	/**
@@ -23,7 +56,6 @@ function shareURL(gIdx) {
 		textarea.value = url;
 		textarea.select();
 		document.execCommand('copy');
-		console.log(textarea);
 		document.body.removeChild(textarea);
 	
 		/**
@@ -44,3 +76,6 @@ function shareURL(gIdx) {
 	}
 	
 }
+
+Kakao.init('2171bdd725e11855b657feead72cfa35');
+Kakao.isInitialized();
