@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import koitt.ratta.doeat.domain.GalleryListVo;
+import koitt.ratta.doeat.domain.FollowVo;
 
 @Mapper
 public interface GalleryMapper {
@@ -13,5 +14,10 @@ public interface GalleryMapper {
 	@Select("SELECT *"
 			+ " FROM gallery_list")
 	public List<GalleryListVo> viewAll();
+	
+	@Select("SELECT *"
+			+ " FROM follow"
+			+ " WHERE from_u_idx = #{fromUIdx} AND to_u_idx = #{toUIdx}")
+	public List<FollowVo> isFollow(int uIdx);
 	
 }

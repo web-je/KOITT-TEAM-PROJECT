@@ -73,12 +73,12 @@
 			<span th:id="${'scrap_cnt' + post.gIdx}">[[${post.scrapCnt}]]</span>
 			<span>[[${post.type1}]]</span>
 			<span>[[${post.type2}]]</span>
-			<span th:onclick = "shareURL([[${post.gIdx}]])"
-				 th:id="${'shareURL' + post.gIdx}">공유하기</span>
-			<span th:onclick = "shareKakao([[${post.gIdx}]])"
+			<span th:onclick = "shareKakao([[${post}]])"
 				 th:id="${'shareKakao' + post.gIdx}" style="display:none">카카오톡</span>
 			<span th:onclick="copyURL([[${post.gIdx}]])"
 				 th:id="${'copyURL' + post.gIdx}" style="display:none">url</span>
+			<span th:onclick = "shareURL([[${post.gIdx}]])"
+				 th:id="${'shareURL' + post.gIdx}">공유하기</span>
 		</div>
 	</div>
 	

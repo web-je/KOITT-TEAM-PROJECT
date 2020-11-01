@@ -9,22 +9,36 @@
  
 function shareURL(gIdx) {
 
-	document.querySelector(`#shareURL${gIdx}`).style.display = 'none';
-	document.querySelector(`#shareKakao${gIdx}`).style.display = 'inline';
-	document.querySelector(`#copyURL${gIdx}`).style.display = 'inline';
+	let sharebut = document.querySelector(`#shareURL${gIdx}`);
+	
+	if (sharebut.innerHTML == '공유하기') {
+		sharebut.innerHTML = '닫기';
+		document.querySelector(`#shareKakao${gIdx}`).style.display = 'inline';
+		document.querySelector(`#copyURL${gIdx}`).style.display = 'inline';
+	} else if (sharebut.innerHTML == '닫기') {
+		sharebut.innerHTML = '공유하기';
+		document.querySelector(`#shareKakao${gIdx}`).style.display = 'none';
+		document.querySelector(`#copyURL${gIdx}`).style.display = 'none';
+	}
 	
 }
 
-function shareKakao(gIdx) {
+function shareKakao(post) {
+
+	let types = post.type2.split(', ');
+	
+	let typesToString = `#${post.type1}`;
+	
+	types.forEach((type2) => typesToString += ` #${type2}`);
 
 	Kakao.Link.sendCustom({
 		templateId: 39719,
 		templateArgs: {
-			'userId':'testUser',
-			'likeCnt':'99999',
-			'shareImg':'img.jpeg',
-			'types':'#type1 #type2 #type3',
-			'gIdx':gIdx
+			'userId':post.uidx,
+			'likeCnt':post.likeCnt,
+//			'shareImg':'img.jpeg',
+			'types':typesToString,
+			'gIdx':post.gidx
 		}
 	});
 	

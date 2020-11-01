@@ -20,10 +20,11 @@ public class GalleryListVo {
 	String type2;
 	int likeCnt;
 	int scrapCnt;
+	Boolean isFollow;
 	
 	@Builder
 	public GalleryListVo(int gIdx, int uIdx, String content, LocalDateTime regDate, LocalDateTime modifyDate, int hit,
-			String type1, String type2, int likeCnt, int scarpCnt) {
+			String type1, String type2, int likeCnt, int scarpCnt, Boolean isFollow) {
 		this.gIdx = gIdx;
 		this.uIdx = uIdx;
 		this.content = content;
@@ -34,6 +35,7 @@ public class GalleryListVo {
 		this.type2 = type2;
 		this.likeCnt = likeCnt;
 		this.scrapCnt = scarpCnt;
+		this.isFollow = isFollow;
 	}
 	
 }
