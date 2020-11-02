@@ -6,6 +6,6 @@ import koitt.ratta.doeat.domain.GalleryListVo;
 
 public interface GalleryService {
 
-	List<GalleryListVo> viewAll();
+	List<GalleryListVo> viewAll(int loginUIdx);
 
 }

@@ -15,9 +15,9 @@ public interface GalleryMapper {
 			+ " FROM gallery_list")
 	public List<GalleryListVo> viewAll();
 	
-	@Select("SELECT *"
+	@Select("SELECT COUNT(ROWNUM)"
 			+ " FROM follow"
 			+ " WHERE from_u_idx = #{fromUIdx} AND to_u_idx = #{toUIdx}")
-	public List<FollowVo> isFollow(int uIdx);
+	public int isFollow(FollowVo followVo);
 	
 }

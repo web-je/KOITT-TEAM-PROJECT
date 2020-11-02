@@ -1,5 +1,6 @@
 package koitt.ratta.doeat.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,25 +17,64 @@ public class GalleryServiceImpl implements GalleryService{
 	GalleryDao dao;
 	
 	@Override
-	public List<GalleryListVo> viewAll() {
-		// 로그인 정보에서 가져온 uIdx로 대체 예정
-//		int loginUIdx = 3;
-//		List<FollowVo> followers = dao.isFollow(loginUIdx);
-//		List<GalleryListVo> gallery = dao.viewAll();
-//		
-//		for (GalleryListVo post : gallery) {
-//			for (FollowVo follower : followers) {
-//				follower.getToUIdx();
-//				if(post.getUIdx() == follower.getToUIdx());
-//			}
-//		}
-//		
-//		for (GalleryListVo post : gallery) {
-//			System.out.println(post.getUIdx());
-//			System.out.println(post.getIsFollow());
-//		}
+	public List<GalleryListVo> viewAll(int loginUIdx) {
+//		 로그인 정보에서 가져온 uIdx로 대체 예정
 		
-		return dao.viewAll();
+		List<GalleryListVo> galleryWithoutFollow = dao.viewAll();
+		FollowVo followVo;
+		List<GalleryListVo> gallery = new ArrayList<GalleryListVo>();
+		
+		for (GalleryListVo post : galleryWithoutFollow) {
+
+			followVo = FollowVo.builder().fromUIdx(loginUIdx)
+										 .toUIdx(post.getUIdx()).build();
+			if (dao.isFollow(followVo) == 1) {
+				GalleryListVo tmpPost = GalleryListVo.builder()
+													 .gIdx(post.getGIdx())
+													 .uIdx(post.getUIdx())
+													 .content(post.getContent())
+													 .regDate(post.getRegDate())
+													 .modifyDate(post.getModifyDate())
+													 .hit(post.getHit())
+													 .type1(post.getType1())
+													 .type2(post.getType2())
+													 .likeCnt(post.getLikeCnt())
+													 .scarpCnt(post.getScrapCnt())
+													 .isFollow(true).build();
+				gallery.add(tmpPost);
+			} else if (dao.isFollow(followVo) == 0){
+				GalleryListVo tmpPost = GalleryListVo.builder()
+													 .gIdx(post.getGIdx())
+													 .uIdx(post.getUIdx())
+													 .content(post.getContent())
+													 .regDate(post.getRegDate())
+													 .modifyDate(post.getModifyDate())
+													 .hit(post.getHit())
+													 .type1(post.getType1())
+													 .type2(post.getType2())
+													 .likeCnt(post.getLikeCnt())
+													 .scarpCnt(post.getScrapCnt())
+													 .isFollow(false).build();
+				gallery.add(tmpPost);
+			} else {
+				GalleryListVo tmpPost = GalleryListVo.builder()
+													 .gIdx(post.getGIdx())
+													 .uIdx(post.getUIdx())
+													 .content(post.getContent())
+													 .regDate(post.getRegDate())
+													 .modifyDate(post.getModifyDate())
+													 .hit(post.getHit())
+													 .type1(post.getType1())
+													 .type2(post.getType2())
+													 .likeCnt(post.getLikeCnt())
+													 .scarpCnt(post.getScrapCnt())
+													 .isFollow(false).build();
+				gallery.add(tmpPost);
+			}
+			
+		}
+		
+		return gallery;
 	}
 	
 }

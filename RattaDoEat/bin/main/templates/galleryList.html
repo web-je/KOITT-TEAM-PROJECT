@@ -6,6 +6,7 @@
 <script defer src="/js/gallery/postAction.js"></script>
 <script defer src="/js/gallery/postFilter.js"></script>
 <script defer src="/js/gallery/copyURL.js"></script>
+<script defer src="/js/gallery/follow.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
@@ -65,20 +66,31 @@
 // 			gal = [[${gallery}]];
 		</script>
 		<div th:each = "post : ${gallery}">
-			<a th:href="@{/post(gIdx=${post.gIdx})}" th:id="${'goPost' + post.gIdx}">[[${post.gIdx}]]</a>
-			<span>[[${post.content}]]</span>
-			<span th:onclick="like([[${post.gIdx}]])">like</span>
-			<span th:id="${'like_cnt' + post.gIdx}">[[${post.likeCnt}]]</span>
-			<span th:onclick="scrap([[${post.gIdx}]])">scrap</span>
-			<span th:id="${'scrap_cnt' + post.gIdx}">[[${post.scrapCnt}]]</span>
-			<span>[[${post.type1}]]</span>
-			<span>[[${post.type2}]]</span>
-			<span th:onclick = "shareKakao([[${post}]])"
-				 th:id="${'shareKakao' + post.gIdx}" style="display:none">카카오톡</span>
-			<span th:onclick="copyURL([[${post.gIdx}]])"
-				 th:id="${'copyURL' + post.gIdx}" style="display:none">url</span>
-			<span th:onclick = "shareURL([[${post.gIdx}]])"
-				 th:id="${'shareURL' + post.gIdx}">공유하기</span>
+			<div>
+				<span>[[${post.uIdx}]]</span>
+				<span th:if="${post.isFollow}==true"
+					 th:class="isFollowTrue"
+					 th:id="${'isFollowTrue' + post.gIdx}" th:text="following"></span>
+				<span th:unless="${post.isFollow}==true"
+					 th:class="isFollowFalse"
+					 th:id="${'isFollowFalse' + post.gIdx}" th:text="follow"></span>
+			</div>
+			<div>
+				<a th:href="@{/post(gIdx=${post.gIdx})}" th:id="${'goPost' + post.gIdx}">[[${post.gIdx}]]</a>
+				<span>[[${post.content}]]</span>
+				<span th:onclick="like([[${post.gIdx}]])">like</span>
+				<span th:id="${'like_cnt' + post.gIdx}">[[${post.likeCnt}]]</span>
+				<span th:onclick="scrap([[${post.gIdx}]])">scrap</span>
+				<span th:id="${'scrap_cnt' + post.gIdx}">[[${post.scrapCnt}]]</span>
+				<span>[[${post.type1}]]</span>
+				<span>[[${post.type2}]]</span>
+				<span th:onclick = "shareKakao([[${post}]])"
+					 th:id="${'shareKakao' + post.gIdx}" style="display:none">카카오톡</span>
+				<span th:onclick="copyURL([[${post.gIdx}]])"
+					 th:id="${'copyURL' + post.gIdx}" style="display:none">url</span>
+				<span th:onclick = "shareURL([[${post.gIdx}]])"
+					 th:id="${'shareURL' + post.gIdx}">공유하기</span>
+			</div>
 		</div>
 	</div>
 	

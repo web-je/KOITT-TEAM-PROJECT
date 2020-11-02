@@ -1,7 +1,6 @@
 package koitt.ratta.doeat.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +23,8 @@ public class GalleryDaoImpl implements GalleryDao{
 	}
 	
 	@Override
-	public List<FollowVo> isFollow(Map<String, Integer> uIdxs) {
-		return sqlSession.selectOne(path + "isFollow", uIdxs);
+	public int isFollow(FollowVo followVo) {
+		return sqlSession.selectOne(path + "isFollow", followVo);
 	}
 
 }
