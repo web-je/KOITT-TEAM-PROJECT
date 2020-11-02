@@ -5,7 +5,9 @@
 	<h4>테스트용 헤더 </h4>
 	<button onclick="location.href='login.go'">로그인 "login.go"</button>
 	<button onclick="location.href='join.go'">회원가입 "join.go"</button>
-
+	<form th:action="@{/logout_proc.go}" method="post">
+		<input type="submit" value="로그아웃">	
+	</form>
 	
 	<button onclick="location.href='userFindId.go'">아이디 찾기"userFindId.go"</button>
 	<button onclick="location.href='userFindPw.go'">비밀번호 찾기"userFindPw.go"</button>

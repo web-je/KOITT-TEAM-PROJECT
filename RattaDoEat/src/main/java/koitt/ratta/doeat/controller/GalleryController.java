@@ -1,13 +1,18 @@
 package koitt.ratta.doeat.controller;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import koitt.ratta.doeat.domain.AccountEntity;
 import koitt.ratta.doeat.service.GalleryService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class GalleryController {
 	
@@ -16,8 +21,10 @@ public class GalleryController {
 	
 	// 갤러리 리스트 출력
 	@GetMapping("gallery")
-	public String viewAllGallery(Model model) {
-		model.addAttribute("gallery", service.viewAll(3));
+	public String viewAllGallery(Model model, HttpSession session) {
+		AccountEntity userInfo=(AccountEntity)session.getAttribute("userInfo");
+		log.info( "~~~~~ 세션으로 유저 정보 넘어 왔는지 확인 : " + userInfo);
+		model.addAttribute("gallery", service.viewAll(userInfo.getUIdx().intValue()));
 		return "galleryList";
 	}
 	

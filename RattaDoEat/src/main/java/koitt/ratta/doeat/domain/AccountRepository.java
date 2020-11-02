@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AccountRepository extends JpaRepository<AccountEntity, BigDecimal> {
 //	public AccountEntity findByUIdx(Long uIdx);
+	public AccountEntity findAllByUserId(String userId);
 	public AccountEntity findByUserId(String id);
 //	public AccountEntity findByPhone(String phone);
 }

@@ -68,5 +68,12 @@ public class AccountServiceImpl implements  AccountService{
 		
 		log.info("계정 서비스 saveUser 의 role : "+ role);
 	}
+	
+	//username(=userId)로 유저 인포 찾기
+	@Override
+	public AccountEntity findByuserId(String userId) throws Exception{
+		AccountEntity userInfo = accountRepository.findAllByUserId(userId);
+		return userInfo;
+	}
 
 }

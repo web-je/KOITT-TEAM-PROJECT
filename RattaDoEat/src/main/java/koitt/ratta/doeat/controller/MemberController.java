@@ -1,5 +1,7 @@
 package koitt.ratta.doeat.controller;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,8 +39,30 @@ public class MemberController {
 	
 	//기본 홈 이동
 	@RequestMapping(value = {"/", "home"})
-	public String main(Model model) {
+	public String main(Model model, Principal principal) throws Exception {
 		model.addAttribute("hello", "model 안녕하세요.");
+		
+		
+		if(principal.getName() != null) {
+			model.addAttribute("username", principal.getName());
+			
+		log.info("~~~~~ 로그인 유저아이디 확인 : principal.getName(); ~~ " + principal.getName());
+		log.info("~~~~~ principal 1 : " + principal);
+			
+		/* principal 1과 2는 다른 객체이지만 똑같은 값을 가집니다. 코드가 짧은 1번을 쓰세요.*/
+		Object principal2 = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails user = (UserDetails)principal2;
+		//유저가 있을 경우 유저 정보 엔티티를 꺼내온다.  
+		AccountEntity userInfo = accountService.findByuserId(user.getUsername());
+		model.addAttribute("userInfo", userInfo);
+		log.info(" ~~~~~ principal 2 : " + principal);
+		log.info(" ~~~~~ 로그인한 유저의 엔티티 내용 userInfo : "+userInfo);
+		}
+	
+		
+	
+		
+		
 		return "/home";
 	}
 	//테스트 페이지
@@ -148,7 +173,7 @@ public class MemberController {
 		return "user/mypage";
 	}
 	
-	@RequestMapping("logout.do")
+	@RequestMapping("logout.go") //페이지 단순이동 
 	public String doLogout() {
 		return "auth/logout";
 	}
@@ -168,5 +193,9 @@ public class MemberController {
 		return "auth/logout";
 	}
 	
+	//유저 서비스
+	
+	//비밀번호 변경
+	//인코딩된 값을 비교합니다. 
 	
 }
