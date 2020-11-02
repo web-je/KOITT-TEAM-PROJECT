@@ -4,24 +4,20 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
-import koitt.ratta.doeat.domain.GalleryVo;
+import koitt.ratta.doeat.domain.GalleryListVo;
+import koitt.ratta.doeat.domain.FollowVo;
 
 @Mapper
 public interface GalleryMapper {
 	
-	@Select("SELECT * FROM com_gallery")
-	public List<GalleryVo> viewAll();
+	@Select("SELECT *"
+			+ " FROM gallery_list")
+	public List<GalleryListVo> viewAll();
 	
-	@Update("UPDATE com_gallery"
-			+ " SET LIKE_NUM = LIKE_NUM+1"
-			+ " WHERE G_IDX = #{gIdx}")
-	public int addLike(int gIdx);
+	@Select("SELECT COUNT(ROWNUM)"
+			+ " FROM follow"
+			+ " WHERE from_u_idx = #{fromUIdx} AND to_u_idx = #{toUIdx}")
+	public int isFollow(FollowVo followVo);
 	
-	@Select("SELECT LIKE_NUM"
-			+ " FROM com_gallery"
-			+ " WHERE G_IDX = #{gIdx}")
-	public int viewLike(int gIdx);
-
 }

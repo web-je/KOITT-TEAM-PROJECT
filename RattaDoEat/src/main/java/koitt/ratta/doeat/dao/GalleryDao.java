@@ -2,14 +2,13 @@ package koitt.ratta.doeat.dao;
 
 import java.util.List;
 
-import koitt.ratta.doeat.domain.GalleryVo;
+import koitt.ratta.doeat.domain.GalleryListVo;
+import koitt.ratta.doeat.domain.FollowVo;
 
 public interface GalleryDao {
 
-	List<GalleryVo> viewAll();
+	List<GalleryListVo> viewAll();
 
-	int addLike(int gIdx);
-
-	int viewLike(int gIdx);
+	int isFollow(FollowVo followVo);
 
 }

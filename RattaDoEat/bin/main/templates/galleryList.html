@@ -3,42 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <title>갤러리 목록</title>
+<script defer src="/js/gallery/postAction.js"></script>
+<script defer src="/js/gallery/postFilter.js"></script>
+<script defer src="/js/gallery/copyURL.js"></script>
+<script defer src="/js/gallery/follow.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
-	<div class="wrap" id="galList">
-		<div th:each = "post : ${gallery}">
-			<span>[[${post.gIdx}]]</span>
-			<span>[[${post.content}]]</span>
-			<span th:onclick = "like([[${post.gIdx}]])">like</span>
-			<span th:id="likeNum + ${post.gIdx}">[[${post.likeNum}]]</span>
+
+	<!-- filter1 : type1 필터 -->
+
+	<div>
+		<div style="display:none" id="filter1">
+			<input type="checkbox" class="filter1" id="filter1_1" value="한식" checked/>
+			<input type="checkbox" class="filter1" id="filter1_2" value="중식" checked/>
+			<input type="checkbox" class="filter1" id="filter1_3" value="양식" checked/>
+			<input type="checkbox" class="filter1" id="filter1_4" value="일식" checked/>
+		</div>
+		<div>
+			<label for="filter1_1">한식</label>
+			<label for="filter1_2">중식</label>
+			<label for="filter1_3">양식</label>
+			<label for="filter1_4">일식</label>
 		</div>
 	</div>
-</body>
-<script type="text/javascript">
-
-	function like(gIdx) {
-		console.log(`-- request to send -- post ${gIdx} like +1`);
-		
-		let xhr = new XMLHttpRequest();
-		xhr.open('GET', '/gallery_like?gIdx=' + gIdx, true);
-		
-		xhr.onload = function() {
-			console.log(this)
-			if (this.readyState == 4 && this.status == 200) {
-				if (this.response == 0){	// 실패
-					return;
-				}else{	// 성공
-					document.querySelector(`#likeNum${gIdx}`).textContent = this.response;
-				}
-			}
-		}
-		
-		xhr.onerror = function() {
-			console.log(this);
-		}
-		
-		xhr.send();
-	}
 	
-</script>
+	<!-- filter2 : type2 필터 -->
+	
+	<div>
+		<div style="display:none" id="filter2">
+			<input type="checkbox" class="filter2" id="filter2_1" value="생선"/>
+			<input type="checkbox" class="filter2" id="filter2_2" value="채소"/>
+			<input type="checkbox" class="filter2" id="filter2_3" value="육류"/>
+		</div>
+		<div>
+			<label for="filter2_1">생선</label>
+			<label for="filter2_2">채소</label>
+			<label for="filter2_3">육류</label>
+		</div>
+	</div>
+	
+	<div>
+		<div style="display:none">
+			<input type="checkbox" id="isVegan" value="5"/>
+		</div>
+		<div>
+			<label for="isVegan">isVegan</label>
+		</div>
+	</div>
+	
+	<div class="wrap">
+		<span th:onclick="sort('hit')">조회수순으로 정렬/</span>
+		<span th:onclick="sort('like_cnt')">좋아요순으로 정렬/</span>
+		<span th:onclick="sort('scrap_cnt')">스크랩순으로 정렬/</span>
+		<span th:onclick="sort('reg_date')">최근등록순으로 정렬</span>
+	</div>
+	<script th:inline="javascript">
+		let gal = "";
+	</script>
+	<div class="wrap" id="galList">
+		<script th:inline="javascript">
+// 			gal = [[${gallery}]];
+		</script>
+		<div th:each = "post : ${gallery}">
+			<div>
+				<span>[[${post.uIdx}]]</span>
+				<span th:if="${post.isFollow}==true"
+					 th:class="isFollowTrue"
+					 th:id="${'isFollowTrue' + post.gIdx}" th:text="following"></span>
+				<span th:unless="${post.isFollow}==true"
+					 th:class="isFollowFalse"
+					 th:id="${'isFollowFalse' + post.gIdx}" th:text="follow"></span>
+			</div>
+			<div>
+				<a th:href="@{/post(gIdx=${post.gIdx})}" th:id="${'goPost' + post.gIdx}">[[${post.gIdx}]]</a>
+				<span>[[${post.content}]]</span>
+				<span th:onclick="like([[${post.gIdx}]])">like</span>
+				<span th:id="${'like_cnt' + post.gIdx}">[[${post.likeCnt}]]</span>
+				<span th:onclick="scrap([[${post.gIdx}]])">scrap</span>
+				<span th:id="${'scrap_cnt' + post.gIdx}">[[${post.scrapCnt}]]</span>
+				<span>[[${post.type1}]]</span>
+				<span>[[${post.type2}]]</span>
+				<span th:onclick = "shareKakao([[${post}]])"
+					 th:id="${'shareKakao' + post.gIdx}" style="display:none">카카오톡</span>
+				<span th:onclick="copyURL([[${post.gIdx}]])"
+					 th:id="${'copyURL' + post.gIdx}" style="display:none">url</span>
+				<span th:onclick = "shareURL([[${post.gIdx}]])"
+					 th:id="${'shareURL' + post.gIdx}">공유하기</span>
+			</div>
+		</div>
+	</div>
+	
+	<a href="/test">aaa</a>
+	
+</body>
 </html>
