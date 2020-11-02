@@ -17,7 +17,8 @@ public class GalleryController {
 	// 갤러리 리스트 출력
 	@GetMapping("gallery")
 	public String viewAllGallery(Model model) {
-		model.addAttribute("gallery", service.viewAll(3));
+		int loginUIdx = 3;
+		model.addAttribute("gallery", service.viewAll(loginUIdx));
 		return "galleryList";
 	}
 	

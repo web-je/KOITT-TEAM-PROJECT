@@ -69,11 +69,9 @@
 			<div>
 				<span>[[${post.uIdx}]]</span>
 				<span th:if="${post.isFollow}==true"
-					 th:class="isFollowTrue"
-					 th:id="${'isFollowTrue' + post.gIdx}" th:text="following"></span>
+					  th:class="isFollowTrue" th:classappend="'uIdx'+${post.uIdx}" th:text="following"></span>
 				<span th:unless="${post.isFollow}==true"
-					 th:class="isFollowFalse"
-					 th:id="${'isFollowFalse' + post.gIdx}" th:text="follow"></span>
+					  th:class="isFollowFalse" th:classappend="'uIdx'+${post.uIdx}" th:text="follow"></span>
 			</div>
 			<div>
 				<a th:href="@{/post(gIdx=${post.gIdx})}" th:id="${'goPost' + post.gIdx}">[[${post.gIdx}]]</a>
@@ -91,6 +89,7 @@
 				<span th:onclick = "shareURL([[${post.gIdx}]])"
 					 th:id="${'shareURL' + post.gIdx}">공유하기</span>
 			</div>
+			<hr/>
 		</div>
 	</div>
 	

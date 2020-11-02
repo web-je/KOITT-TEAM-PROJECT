@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import koitt.ratta.doeat.dao.FollowDao;
 import koitt.ratta.doeat.dao.GalleryDao;
 import koitt.ratta.doeat.domain.GalleryListVo;
 import koitt.ratta.doeat.domain.FollowVo;
@@ -15,6 +16,9 @@ public class GalleryServiceImpl implements GalleryService{
 	
 	@Autowired
 	GalleryDao dao;
+	
+	@Autowired
+	FollowDao followDao;
 	
 	@Override
 	public List<GalleryListVo> viewAll(int loginUIdx) {
@@ -28,7 +32,7 @@ public class GalleryServiceImpl implements GalleryService{
 
 			followVo = FollowVo.builder().fromUIdx(loginUIdx)
 										 .toUIdx(post.getUIdx()).build();
-			if (dao.isFollow(followVo) == 1) {
+			if (followDao.isFollow(followVo) == 1) {
 				GalleryListVo tmpPost = GalleryListVo.builder()
 													 .gIdx(post.getGIdx())
 													 .uIdx(post.getUIdx())
@@ -42,7 +46,7 @@ public class GalleryServiceImpl implements GalleryService{
 													 .scarpCnt(post.getScrapCnt())
 													 .isFollow(true).build();
 				gallery.add(tmpPost);
-			} else if (dao.isFollow(followVo) == 0){
+			} else if (followDao.isFollow(followVo) == 0){
 				GalleryListVo tmpPost = GalleryListVo.builder()
 													 .gIdx(post.getGIdx())
 													 .uIdx(post.getUIdx())

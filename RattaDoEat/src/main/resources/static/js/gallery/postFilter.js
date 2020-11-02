@@ -95,7 +95,6 @@ function sendFilter() {
 			console.log(`-- sort by ${sortColumn}`);
 			
 			document.querySelector('#galList').outerHTML = this.response;
-			console.log(gal);
 		}
 	}
 	xhr.onerror = function() {
