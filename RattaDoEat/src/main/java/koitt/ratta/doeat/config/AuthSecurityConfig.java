@@ -27,40 +27,34 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 
 import koitt.ratta.doeat.service.CustomProvider;
 import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 
-@Log // 추가(lombok)
+@Slf4j
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true) // 추가
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private SessionRegistry sessionRegistry; //세션 등록 담당빈
-
+	@Autowired
+	private DataSource dataSource; // 추가
+	
 	@Autowired
 	private UserDetailsService userDetailsService;
 
 	@Autowired
 	private CustomProvider customProvider;
 
-	@Autowired
-	private DataSource dataSource; // 추가
-	
-//	@Bean
-//	public PasswordEncoder passwordEncoder2() {
-//		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//	}
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
-		// 주의) 여기서 strength가 높아지면 빌드 타임이 너무 많이 소모될 수 있으므로 적절히 조정하여 빌드 타임을 조정합니다. 4~31
 		return new BCryptPasswordEncoder(4);
 	}
 
-	// since spring boot 2.0 over
 	@Override
 	@Bean
-	public AuthenticationManager authenticationManagerBean() throws Exception {
+	public AuthenticationManager authenticationManagerBean() throws Exception { //인증 객체 관리자
 		return super.authenticationManagerBean();
 	}
 
@@ -69,97 +63,14 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 		return new SessionRegistryImpl();
 	}
 
-	/*
-	 * @Override protected void configure(AuthenticationManagerBuilder
-	 * authManagerBuilder) throws Exception { ...
-	 * .userDetailsService(userDetailsService()); ... }
-	 */
-
-	// since sapring boot 2.0 over
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception { //커스텀 프로바이더 추가. 없으면 기본프로바이더로 작동. 
 		auth.authenticationProvider(customProvider);
-
-		// auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-		
-		// 주의사항) 아래의 코드 부류들을 삽입/대체시 지속적 Stackoverflow error !!!
-		// auth.parentAuthenticationManager(authenticationManagerBean());
-		// auth.userDetailsService(userDetailsService()).passwordEncoder(bCryptPasswordEncoder());
 	}
-/*
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		log.info("configure !!!");
-
-		// h2 console 사용을 위한 설정
-		// http.csrf().ignoringAntMatchers("/h2console/**"); // h2
-		http.headers().frameOptions().sameOrigin();
-
-		http.authorizeRequests()
-				// 해당 url을 허용 설정.
-				// .antMatchers("/resources/**","/loginError","/registration","/h2console/**").permitAll()
-				// // h2
-				// 참고) antMatchers :
-				// https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/util/AntPathMatcher.html
-					.antMatchers("/static/**", "/webjars/**").permitAll()
-					.antMatchers("/login.do").permitAll()
-					.antMatchers("/login_error.do").permitAll()
-					.antMatchers("/member/member_join.do").permitAll()
-					.antMatchers("/member/join_proc.do").permitAll()
-					// 폼점검 관련(아아디/이메일/휴대폰 중복 점검)
-					.antMatchers("/member/*Check.do").permitAll()
-					// admin 폴더에 경우 admin 권한이 있는 사용자에게만 허용
-					.antMatchers("/admin/**").hasAuthority("ROLE_ADMIN") //폴더별로하면 **으로 와일드카드쓰면되니까 지정하기 편하다.
-					// user 폴더에 경우 user 권한이 있는 사용자에게만 허용
-					.antMatchers("/user/**").hasAuthority("ROLE_USER").anyRequest().authenticated()
-					.and()
-				.csrf()
-					.ignoringAntMatchers("/member/member_join.do")
-					.ignoringAntMatchers("/login.do")
-					.ignoringAntMatchers("/login_error.do")
-					.and()
-				.formLogin()
-					.loginPage("/login.do")
-					// .loginProcessingUrl("/login.do")
-					// .defaultSuccessUrl("/welcome.do")
-					// .failureUrl("/login_error.do")
-					.successHandler(new CustomAuthenticationSuccess()) // 로그인 성공시 핸들러 메서드
-					.failureHandler(new CustomAuthenticationFailure()) // 로그인 실패시 핸들러 메서드
-					.permitAll()
-					.and()
-				.logout()
-					.permitAll()
-					.logoutUrl("/logout.do")
-					.deleteCookies("JSESSIONID")
-					.and()
-				.exceptionHandling()
-					.accessDeniedPage("/403") // 권한이 없을경우 해당 url로 이동
-					.and()
-				.sessionManagement() // 세션 제어
-					.maximumSessions(1) // 최대 동시 세션 사용수(중복 로그인 가능 설정시 활용)
-					.expiredUrl("/login.do")
-					.sessionRegistry(sessionRegistry);
-
-		// 추가된 부분 : remember-me 관련
-		// remember-me cookie
-		// => 사용자이름 + cookie expired time(만료 시간) + 패쓰워드 => Base64(Md5방식) 암호화
-//		
-//		  base64(username + ":" + expirationTime + ":" + md5Hex(username + ":" +
-//		  expirationTime + ":" password + ":" + key))
-//		 
-		http.rememberMe().key("javateam").userDetailsService(userDetailsService).tokenRepository(getJDBCRepository())
-				.tokenValiditySeconds(60 * 60 * 24); // 24시간(1일)
-	}*/
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-
-		log.info("configure !!!");
-
-		// h2 console 사용을 위한 설정
-		// http.csrf().ignoringAntMatchers("/h2console/**"); // h2
 		http.headers().frameOptions().sameOrigin();
 
 		http.authorizeRequests()
@@ -181,8 +92,8 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 					// .loginProcessingUrl("/login.do")
 					// .defaultSuccessUrl("/welcome.do")
 					// .failureUrl("/login_error.do")
-					.successHandler(new CustomAuthenticationSuccess()) // 로그인 성공시 핸들러 메서드
-					.failureHandler(new CustomAuthenticationFailure()) // 로그인 실패시 핸들러 메서드
+					.successHandler(new CustomAuthenticationSuccess()) // 로그인 성공시 핸들러
+					.failureHandler(new CustomAuthenticationFailure()) // 로그인 실패시 핸들러
 					.permitAll()
 					.and()
 				.logout()
@@ -198,6 +109,7 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 					.expiredUrl("/login.do")
 					.sessionRegistry(sessionRegistry);
 
+		//리멤버미 아직 구현안함 ----------
 		// 추가된 부분 : remember-me 관련
 		// remember-me cookie
 		// => 사용자이름 + cookie expired time(만료 시간) + 패쓰워드 => Base64(Md5방식) 암호화
@@ -217,13 +129,6 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 		repo.setDataSource(dataSource);
 
 		return repo;
-	} //
-
-	
-//    @Autowired public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { //
-//    	auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); 
-//		auth.authenticationProvider(customProvider); 
-//	}
-	 
+	}
 
 }

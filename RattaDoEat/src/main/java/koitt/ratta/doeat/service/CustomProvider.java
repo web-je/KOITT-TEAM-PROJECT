@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomProvider implements AuthenticationProvider, UserDetailsService {
 	
 	@Autowired
-	private BCryptPasswordEncoder passwordEncoder; //원래 이렇게 하는게 맞다. 레거시든 부트든 간에
+	private BCryptPasswordEncoder passwordEncoder; 
 	
 	private JdbcTemplate jdbcTemplate; //스프링jdbc, 마이바티스 사용하고 싶으면 수정가능.
 	
@@ -56,7 +56,7 @@ public class CustomProvider implements AuthenticationProvider, UserDetailsServic
 	}
 	
 	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException { ///실제적인 인증!!! 중요한
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		
 		log.debug("###### 로그인 인증 점검 : authenticate ######");
 		

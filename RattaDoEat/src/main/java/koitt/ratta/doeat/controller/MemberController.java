@@ -165,7 +165,6 @@ public class MemberController {
     if (auth != null) {    
         new SecurityContextLogoutHandler().logout(request, response, auth);
     }
-
 		return "auth/logout";
 	}
 	

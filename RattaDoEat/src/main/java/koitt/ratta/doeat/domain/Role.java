@@ -26,7 +26,6 @@ public class Role implements GrantedAuthority{
 	private static final long serialVersionUID = -7504679258252967630L;
 
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO) // 오토, 하이버네이트로 알아서 만듬.  spring.jpa.hibernate.ddl-auto=update 있어야함. hidernate-sequence는 jap/hibernate의 기본시퀀스이다. 이던 auto 자동생성으로 해줘야함.
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "user_role_seq")
 	@Column(name="user_role_id")
 	private Long id;
