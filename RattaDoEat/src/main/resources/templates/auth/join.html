@@ -2,49 +2,33 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-    <title>회원가입 폼</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-        <form action="/login.html" th:action="@{/}" method="get">
-            <button class="btn btn-sm btn-success text-uppercase my-4" type="Submit">Go To Sign In</button>
-        </form>
-        
-        <div class="card-body">
-        <form autocomplete="off" action="#" th:action="@{/registration}" th:object="${account}" method="post" class="form-horizontal" role="form">
-            <h3 class="text-white text-uppercase mb-5">회원가입</h3>
-            
-            <!-- Email -->
-            <div class="form-group">
-                <input type="text" th:field="*{email}" placeholder="Email" class="form-control signup-text" autofocus />
-                <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></label>
-            </div>
-            
-            <!-- user name -->
-            <div class="form-group">
-                <input type="text" th:field="*{username}" placeholder="User Name" class="form-control signup-text"/> 
-                <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="validation-message"></label>
-            </div>
-            
-            <!-- password -->
-            <div class="form-group">
-                <input type="password" th:field="*{password}" placeholder="Password" class="form-control signup-text"/>
-                <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label>
-            </div>
-            
-            <!-- confirm password -->
-            <div class="form-group">
-                <input type="password" th:field="*{confirmPassword}" placeholder="Confirm Password" class="form-control signup-text"/> 
-                <label th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="validation-message"></label>
-            </div>
-            
-            <!-- submit button -->
-            <div class="form-group">
-                <button type="submit" class="btn btn-warning btn-block text-uppercase">가입</button>
-            </div>
-            
-            <h4><span class="text-success" th:utext="${successMessage}">회원가입 성공</span></h4>
-        </form>
-    </div>
+
+				<!--  오브젝트 안에 EL로 객체 불러온거임. 객체가 있어야 불러올수있다. join.go에서 빈거만들어서보냄 -->
+	<form action="#" th:action="@{/join.do}" th:object="${accountDto}" method="post">
+
+		<div class="card-body">
+			<h3>회원가입</h3>
+			<!-- Email -->
+			
+				<input type="text" th:field="*{userId}" name="userId" placeholder="Email"
+					class="form-control signup-text" autofocus />
+			
+			<!-- user name -->
+			<input type="text" name="name" th:field="*{name}" placeholder="User Name"
+				class="form-control signup-text" />
+
+			<!-- password -->
+			<input type="password" name="userPw" th:field="*{userPw}" placeholder="Password"
+				class="form-control signup-text" />
+			
+			
+			<button class="btn btn-sm btn-success text-uppercase my-4"
+				type="Submit">회원가입 하기</button>
+	</form>
+
 </body>
 </html>

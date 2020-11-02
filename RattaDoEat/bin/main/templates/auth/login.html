@@ -10,6 +10,10 @@
 </head>
 
 <body>
+	
+	새로만든거, 에러 메세지 : <p th:text="${msg}"></p>
+	
+	<div th:insert="layout/header"></div>
 	<h3>"login.go" 로 이동된 페이지.</h3>
 
 	<div th:if="${param.error}">
@@ -21,9 +25,9 @@
 	</div>
 			
 	<div class="card-body">
-		<form th:action="@{/login.go}" method="post">
+		<form th:action="@{/login.go}" method="post"> <!-- 가상 주소임, 필터에서 로그인 처리. 웹시큐리티컨피그에  -->
 			<!-- name속성 이름으로 post이동 -->
-			<input type="text" id="username" name="username" placeholder="email"
+			<input type="text" id="username" name="username"placeholder="email"
 				class="form-control my-3 login-text" autofocus /> 
 			<input type="password" placeholder="Password" id="password" name="password"
 				class="form-control mb-3 login-text" />
