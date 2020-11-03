@@ -9,7 +9,7 @@ import koitt.ratta.doeat.domain.AccountEntity;
 public interface AccountService {
 
 	/**
-	 * 유저 저장, 로그인
+	 * 회원가입, 유저 저장
 	 */
 	public void saveUser(AccountDto user) throws Exception;
 
@@ -18,6 +18,5 @@ public interface AccountService {
 	 * @param userId
 	 */
 	public AccountEntity findByuserId(String userId) throws Exception;
-
 
 }

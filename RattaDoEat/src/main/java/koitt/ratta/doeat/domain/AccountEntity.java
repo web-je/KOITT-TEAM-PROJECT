@@ -31,14 +31,14 @@ import lombok.Setter;
 @Data
 @Entity
 @Table(name="user_info")
-@SequenceGenerator(name="USER_INFO_SEQ_GEN", sequenceName = "USER_INFO_SEQ", initialValue = 1, allocationSize = 1) //시퀀스는 일단 pk지정 pk는여러개가능.name은 임의로
+@SequenceGenerator(name="USER_INFO_SEQ_GEN", sequenceName = "USER_INFO_SEQ", initialValue = 1, allocationSize = 1)
 public class AccountEntity {
 	
 	
 	@Id //해당필드 pk설정
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "USER_INFO_SEQ_GEN")
 	@Column(name="u_idx")
-	private BigDecimal uIdx; //long 에서 빅데시마로 변경!! 오라클 오류일 수있음. 
+	private BigDecimal uIdx; //long 에서 빅데시마로 변경, 오라클 오류.
 	
 	
 	@Column(name="user_id")
@@ -60,16 +60,6 @@ public class AccountEntity {
 	@Column
 	private String address;
 	
-	//테이블에 직접등록XX??
-	/*@ManyToMany(cascade = CascadeType.MERGE)
-	@JoinTable(name="user_roles", 
-		joinColumns = @JoinColumn(name="u_idx")
-		,inverseJoinColumns = @JoinColumn(name="user_role_id"))
-	private java.util.Set<Role> roles;
-	
-	*/
-	
-	//dto를 엔티티로 변환합니다. 
 	@Builder
 	public void accountEntityFromDto(AccountDto dto) {
 		this.uIdx = dto.getUIdx();

@@ -76,11 +76,9 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 					.antMatchers("/error.go").permitAll()
 					.antMatchers("/static/**", "/home", "/", "/join**", "/gallery").permitAll()
-					//.antMatchers("/admin**","/admin/**").hasRole("ADMIN") //hasRole 인메모리 테스트용.
 					.antMatchers("/admin**","/admin/**").hasAuthority("ROLE_ADMIN") //hasAuthority DB용
-					//.antMatchers("/user/**").hasRole("USER")
 					.antMatchers("/user/**").hasAuthority("ROLE_USER")
-					.anyRequest().authenticated() //어떤 롤이든 상관없이 인증만되면 된다. 나머지 모든 리퀘스트는 인증이 필요하다, 는 구문
+					.anyRequest().authenticated() //어떤 롤이든 상관없이 인증만되면 된다. 나머지 모든 리퀘스트는 인증이 필요하다
 					.and()
 //				.csrf()
 //					.ignoringAntMatchers("/member/member_join.do") //제외
@@ -91,7 +89,7 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 					.loginPage("/login.go")
 					// .loginProcessingUrl("/login.do")
 					// .defaultSuccessUrl("/welcome.do")
-					// .failureUrl("/login_error.do")
+					// .failureUrl("/login_error.do") //아래 핸들러 역할과 같은 구문. 
 					.successHandler(new CustomAuthenticationSuccess()) // 로그인 성공시 핸들러
 					.failureHandler(new CustomAuthenticationFailure()) // 로그인 실패시 핸들러
 					.permitAll()
@@ -99,7 +97,7 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 				.logout()
 					.permitAll()
 					.logoutUrl("/logout.go")
-					.deleteCookies("JSESSIONID") //쿠키는 클라이언트에만 저장. 브라우저 제이세션까지 다지운다는거. 안해도 되지만 확실하게, 
+					.deleteCookies("JSESSIONID") //쿠키는 클라이언트에만 저장. 안해도 되지만 확실하게 브라우저 제이세션까지 모두 삭제. 
 					.and()
 				.exceptionHandling()
 					.accessDeniedPage("/accessDenied.go") // 권한이 없을경우 해당 url로 이동 /403대응

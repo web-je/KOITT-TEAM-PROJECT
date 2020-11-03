@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import koitt.ratta.doeat.domain.AccountEntity;
 import koitt.ratta.doeat.service.GalleryService;
 import lombok.extern.slf4j.Slf4j;
-
+/**
+ * @author koitt04a
+ * 11.03 수정 GW  : 갤러리 리스트 출력 viewAllGallery 에 세션으로 유저 정보 받는 코드 추가. 
+ */
 @Slf4j
 @Controller
 public class GalleryController {
@@ -22,9 +25,10 @@ public class GalleryController {
 	// 갤러리 리스트 출력
 	@GetMapping("gallery")
 	public String viewAllGallery(Model model, HttpSession session) {
+		
 		AccountEntity userInfo=(AccountEntity)session.getAttribute("userInfo");
-		log.info( "~~~~~ 세션으로 유저 정보 넘어 왔는지 확인 : " + userInfo);
 		model.addAttribute("gallery", service.viewAll(userInfo.getUIdx().intValue()));
+		
 		return "galleryList";
 	}
 	

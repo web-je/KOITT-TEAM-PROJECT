@@ -33,7 +33,7 @@ public class AccountDto {
 	private String address;
 	
 	
-	//엔티티를 dto로 변환하는 빌더.
+	//엔티티를 dto로 변환
 	@Builder
 	public AccountDto(AccountEntity entity) {
 		this.uIdx = entity.getUIdx();

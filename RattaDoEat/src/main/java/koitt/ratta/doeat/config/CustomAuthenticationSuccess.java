@@ -34,31 +34,12 @@ public class CustomAuthenticationSuccess implements AuthenticationSuccessHandler
 
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
-	@Autowired
-	AccountService accountService;
-	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 
-		log.info("로그인 성공");
-		
-		redirectStrategy.sendRedirect(request, response, "/hello"); //성공하면 이 링크 제공
-		
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails user = (UserDetails)principal;
-		
-		try {
-			 AccountEntity userInfo = accountService.findByuserId(user.getUsername());
-			HttpSession session = request.getSession(true);
-			session.setAttribute("userInfo", userInfo);
-			log.info(" ~~~~~ 커스텀프로바이더 성공, 유저 인포 : " + userInfo);
-			} 
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		
+		log.info(" 커스텀 프로바이더 ~~~~ 로그인 성공");
+		redirectStrategy.sendRedirect(request, response, "/login.do"); //성공하면 이 링크 제공
 	
 	}
 }

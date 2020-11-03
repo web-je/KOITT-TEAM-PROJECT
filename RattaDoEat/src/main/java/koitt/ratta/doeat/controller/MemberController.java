@@ -1,6 +1,5 @@
 package koitt.ratta.doeat.controller;
 
-import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +22,6 @@ import koitt.ratta.doeat.domain.AccountDto;
 import koitt.ratta.doeat.domain.AccountEntity;
 import koitt.ratta.doeat.service.AccountService;
 import koitt.ratta.doeat.service.AccountServiceImpl;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 /**
  * @author GW
@@ -31,7 +29,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Controller
-//@RequestMapping("member")
 public class MemberController {
 	
 	@Autowired
@@ -39,33 +36,34 @@ public class MemberController {
 	
 	//기본 홈 이동
 	@RequestMapping(value = {"/", "home"})
-	public String main(Model model, Principal principal) throws Exception {
+	public String main(Model model) throws Exception {
 		model.addAttribute("hello", "model 안녕하세요.");
-		
-		
-		if(principal.getName() != null) {
-			model.addAttribute("username", principal.getName());
-			
-		log.info("~~~~~ 로그인 유저아이디 확인 : principal.getName(); ~~ " + principal.getName());
-		log.info("~~~~~ principal 1 : " + principal);
-			
-		/* principal 1과 2는 다른 객체이지만 똑같은 값을 가집니다. 코드가 짧은 1번을 쓰세요.*/
-		Object principal2 = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails user = (UserDetails)principal2;
-		//유저가 있을 경우 유저 정보 엔티티를 꺼내온다.  
-		AccountEntity userInfo = accountService.findByuserId(user.getUsername());
-		model.addAttribute("userInfo", userInfo);
-		log.info(" ~~~~~ principal 2 : " + principal);
-		log.info(" ~~~~~ 로그인한 유저의 엔티티 내용 userInfo : "+userInfo);
-		}
-	
-		
-	
-		
-		
-		return "/home";
+		return "home";
 	}
-	//테스트 페이지
+	
+	//로그인 세션 정보 저장. 
+	@RequestMapping("login.do")
+	public String doLogin(Model model, HttpServletRequest request) {
+
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails user = (UserDetails)principal;
+		log.info(" ~~~~~ 컨트롤러 로그인 user : " + user);
+		
+		try {
+			 AccountEntity userInfo = accountService.findByuserId(user.getUsername());
+			HttpSession session = request.getSession(true);
+			session.setAttribute("userInfo", userInfo);
+			log.info(" ~~~~~ login.do 성공, 유저 인포 : " + userInfo);
+			} 
+		catch (Exception e) {
+			log.error("~~~~~ login.do try catch 에러");
+			e.printStackTrace();
+		}
+		return "/hello";
+	}
+	
+	
+	//테스트 페이지, 로그인 성공시 들어가서 확인. 
 	@RequestMapping("hello")
 	public String goHello(Model model) {
 		
@@ -78,30 +76,17 @@ public class MemberController {
 		return "auth/login";
 	}
 	
-	//로그인 -------------서큐리티에서 자동으로 로그인을 해줘서 필요없는 코드입니다. 
-	/*
-	@RequestMapping("login.do")
-	public String doLogin(@RequestParam("userId") String userId, @RequestParam String userPw, Model model) {
-		log.info("~~ login.do로 넘어온 accountDto 계정정보 아이디,비밀번호 : " + userId +", "+ userPw);
-		
-		//로그인 서비스
-		
-		return "user/mypage";
-		//return "home";
-	}
-	*/
-	
+
 	//가입 페이지 이동
 	@RequestMapping("join.go")
 	public String goJoin(Model model) {
-		model.addAttribute("accountDto", new AccountDto()); //join페이지에 th:object에서 사용중인 accountDto가 비어있는걸 보내줘야 해당뷰에서 사용가능 타임리프 오브젝트로 받아서 join.do로 넘길수 있음.
+		model.addAttribute("accountDto", new AccountDto());
 		return "auth/join";
 	}
 
-	//가입
+	//가입, 유저 인포 저장.
 	@RequestMapping("join.do")
 	public String doJoin(@ModelAttribute AccountDto accountDto, Model model) throws Exception {
-	//public String doJoin(@ModelAttribute("accountDto") AccountDto dto, Model model) throws Exception {
 		
 		log.info("회원가입 폼에서 넘어오는 값 : " + accountDto);
 		
@@ -133,11 +118,11 @@ public class MemberController {
 	public String goLoginError(Model model, HttpSession session) {
 		
 		// Spring CustomProvider 인증(Auth) 에러 메시지 처리
-    	log.info("##### 로그인 에러 처리 페이지 #####");
+    	log.info("~~~~~ 로그인 에러 처리 페이지");
         Object secuSess = session.getAttribute("SPRING_SECURITY_LAST_EXCEPTION");
 
-        log.info("#### 인증 오류 메시지 : " + secuSess);
-        log.info("#### 인증 오류 메시지 : " + secuSess.toString());
+        log.info("~~~~~ 인증 오류 메시지 : " + secuSess);
+        log.info("~~~~~ 인증 오류 메시지 : " + secuSess.toString());
 
         model.addAttribute("error", "true");
         model.addAttribute("msg", secuSess);
@@ -146,6 +131,7 @@ public class MemberController {
         return "auth/login";
 	}	
 	
+	//AuthSecurityConfig 설정 권한 오류 대응 페이지. 
 	@RequestMapping("/accessDenied.go")
 	public String goAccessDenied() {
 		
@@ -173,12 +159,12 @@ public class MemberController {
 		return "user/mypage";
 	}
 	
-	@RequestMapping("logout.go") //페이지 단순이동 
+	@RequestMapping("logout.go") //시큐리티 이동, 페이지 단순이동 
 	public String doLogout() {
 		return "auth/logout";
 	}
 	
-	@RequestMapping("logout_proc.go")
+	@RequestMapping("logout_proc.go") //실제 로그아웃.
 	public String goLogout(HttpServletRequest request,
 							HttpServletResponse response) {
 		Authentication auth 
