@@ -24,12 +24,18 @@ public class GalleryController {
 	
 	// 갤러리 리스트 출력
 	@GetMapping("gallery")
+<<<<<<< HEAD
 	public String viewAllGallery(Model model, HttpSession session) {
 		
 		//gw 수정
 		AccountEntity userInfo=(AccountEntity)session.getAttribute("userInfo");
 		model.addAttribute("gallery", service.viewAll(userInfo.getUIdx().intValue()));
 		//model.addAttribute("gallery", service.viewAll(3);
+=======
+	public String viewAllGallery(Model model) {
+		int loginUIdx = 3;
+		model.addAttribute("gallery", service.viewAll(loginUIdx));
+>>>>>>> 5fd6cf4ca829a01a20c977cbaaa8f5bb2b354d30
 		return "galleryList";
 	}
 	
@@ -37,16 +43,6 @@ public class GalleryController {
 	public String viewGallery(Model model, int gIdx) {
 		model.addAttribute("gIdx", gIdx);
 		return "gallery";
-	}
-	
-	@GetMapping("test")
-	public String test() {
-		return "test";
-	}
-	
-	@GetMapping("test2")
-	public String test2() {
-		return "galleryList";
 	}
 
 }

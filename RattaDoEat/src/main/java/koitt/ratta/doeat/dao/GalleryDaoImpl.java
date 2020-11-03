@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import koitt.ratta.doeat.domain.GalleryListVo;
-import koitt.ratta.doeat.domain.FollowVo;
 
 @Repository
 public class GalleryDaoImpl implements GalleryDao{
@@ -21,10 +20,10 @@ public class GalleryDaoImpl implements GalleryDao{
 	public List<GalleryListVo> viewAll() {
 		return sqlSession.selectList(path + "viewAll");
 	}
-	
-	@Override
-	public int isFollow(FollowVo followVo) {
-		return sqlSession.selectOne(path + "isFollow", followVo);
-	}
 
+	@Override
+	public List<GalleryListVo> viewAllByUser(int uIdx) {
+		return sqlSession.selectList(path + "viewAllByUser", uIdx);
+	}
+	
 }
