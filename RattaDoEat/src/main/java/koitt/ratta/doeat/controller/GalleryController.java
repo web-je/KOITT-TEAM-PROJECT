@@ -27,15 +27,5 @@ public class GalleryController {
 		model.addAttribute("gIdx", gIdx);
 		return "gallery";
 	}
-	
-	@GetMapping("test")
-	public String test() {
-		return "test";
-	}
-	
-	@GetMapping("test2")
-	public String test2() {
-		return "galleryList";
-	}
 
 }

@@ -30,7 +30,7 @@ public class FollowServiceImpl implements FollowService {
 	public int unFollow(int loginUIdx, int uIdx) {
 		FollowVo followVo = FollowVo.builder().fromUIdx(loginUIdx)
 											  .toUIdx(uIdx).build();
-		if (dao.isFollow(followVo) != 0) {
+		if (dao.isFollow(followVo) != 1) {
 			return 0;
 		}
 		int result = dao.unFollow(followVo);
