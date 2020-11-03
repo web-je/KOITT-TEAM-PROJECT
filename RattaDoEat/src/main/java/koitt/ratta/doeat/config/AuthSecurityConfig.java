@@ -1,14 +1,8 @@
-/**
- * 
- */
 package koitt.ratta.doeat.config;
 
 import javax.sql.DataSource;
 
-/**
- * @author javateam
- *
- */
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +23,10 @@ import koitt.ratta.doeat.service.CustomProvider;
 import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * @author javateam
+ *
+ */
 @Slf4j
 @Configuration
 @EnableWebSecurity
