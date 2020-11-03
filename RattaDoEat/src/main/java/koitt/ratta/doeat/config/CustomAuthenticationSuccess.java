@@ -1,12 +1,7 @@
 /**
- * 
+ * 작성자 GW
  */
 package koitt.ratta.doeat.config;
-
-/**
- * @author javateam
- *
- */
 
 import java.io.IOException;
 

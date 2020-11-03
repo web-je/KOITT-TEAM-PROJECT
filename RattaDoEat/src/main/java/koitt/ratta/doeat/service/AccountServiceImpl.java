@@ -71,8 +71,8 @@ public class AccountServiceImpl implements  AccountService{
 	
 	//username(=userId)로 유저 인포 찾기
 	@Override
-	public AccountEntity findByuserId(String userId) throws Exception{
-		return accountRepository.findAllByUserId(userId);
+	public AccountEntity findByUserIdService(String userId) throws Exception{
+		return accountRepository.findByUserId(userId);
 	}
 
 }

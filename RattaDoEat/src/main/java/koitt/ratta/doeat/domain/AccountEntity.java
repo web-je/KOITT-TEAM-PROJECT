@@ -1,3 +1,6 @@
+/**
+ * 작성자 GW
+ */
 package koitt.ratta.doeat.domain;
 
 import java.math.BigDecimal;

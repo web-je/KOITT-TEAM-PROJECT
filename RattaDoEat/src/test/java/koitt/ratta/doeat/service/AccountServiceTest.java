@@ -25,7 +25,7 @@ public class AccountServiceTest {
 
 	@Test public void findByuserIdTest() throws Exception { 
 		userId ="id@naver.com"; 
-		assertNotNull(accountService.findByuserId(userId));
+		assertNotNull(accountService.findByUserIdService(userId));
 	 // assertNull(accountService.findByuserId(userId)); 
 	  //<AccountEntity(uIdx=1,userId=id@naver.com, name=홍길동, nickname=null, regdate=null, ip=null,social=0, phone=null, birth=null, address=null)> 
 	  }
@@ -35,7 +35,7 @@ public class AccountServiceTest {
 	public void findByuserIdTestNull() {
 		userId = "id@naver.com";
 		try {
-			accountEntity = accountService.findByuserId(userId);
+			accountEntity = accountService.findByUserIdService(userId);
 		} catch (Exception e) {
 			log.error("~~~~ 어카운트엔티티 에러");
 			e.printStackTrace();

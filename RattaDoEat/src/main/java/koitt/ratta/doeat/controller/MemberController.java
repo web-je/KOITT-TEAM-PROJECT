@@ -1,3 +1,7 @@
+/**
+ * @author GW
+ * 작성일 2020-10-26
+ */
 package koitt.ratta.doeat.controller;
 
 
@@ -23,10 +27,7 @@ import koitt.ratta.doeat.domain.AccountEntity;
 import koitt.ratta.doeat.service.AccountService;
 import koitt.ratta.doeat.service.AccountServiceImpl;
 import lombok.extern.slf4j.Slf4j;
-/**
- * @author GW
- * 작성일 2020-10-26
- */
+
 @Slf4j
 @Controller
 public class MemberController {
@@ -50,7 +51,7 @@ public class MemberController {
 		log.info(" ~~~~~ 컨트롤러 로그인 user : " + user);
 		
 		try {
-			 AccountEntity userInfo = accountService.findByuserId(user.getUsername());
+			 AccountEntity userInfo = accountService.findByUserIdService(user.getUsername());
 			HttpSession session = request.getSession(true);
 			session.setAttribute("userInfo", userInfo);
 			log.info(" ~~~~~ login.do 성공, 유저 인포 : " + userInfo);

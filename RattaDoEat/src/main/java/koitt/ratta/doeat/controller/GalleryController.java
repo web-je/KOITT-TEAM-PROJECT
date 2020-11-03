@@ -26,9 +26,10 @@ public class GalleryController {
 	@GetMapping("gallery")
 	public String viewAllGallery(Model model, HttpSession session) {
 		
+		//gw 수정
 		AccountEntity userInfo=(AccountEntity)session.getAttribute("userInfo");
 		model.addAttribute("gallery", service.viewAll(userInfo.getUIdx().intValue()));
-		
+		//model.addAttribute("gallery", service.viewAll(3);
 		return "galleryList";
 	}
 	

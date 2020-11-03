@@ -17,6 +17,6 @@ public interface AccountService {
 	 * 유저 이메일 아이디로 엔티티 불러오기.
 	 * @param userId
 	 */
-	public AccountEntity findByuserId(String userId) throws Exception;
+	public AccountEntity findByUserIdService(String userId) throws Exception;
 
 }
