@@ -1,10 +1,10 @@
+
+package koitt.ratta.doeat.controller;
+
 /**
  * @author GW
  * 작성일 2020-10-26
  */
-package koitt.ratta.doeat.controller;
-
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -38,7 +38,7 @@ public class MemberController {
 	//기본 홈 이동
 	@RequestMapping(value = {"/", "home"})
 	public String main(Model model) throws Exception {
-		model.addAttribute("hello", "model 안녕하세요.");
+		//model.addAttribute("hello", "model 안녕하세요.");
 		return "home";
 	}
 	
@@ -79,7 +79,7 @@ public class MemberController {
 	
 
 	//가입 페이지 이동
-	@RequestMapping("join.go")
+	@RequestMapping(value = {"join.go","join2.go"})
 	public String goJoin(Model model) {
 		model.addAttribute("accountDto", new AccountDto());
 		return "auth/join";

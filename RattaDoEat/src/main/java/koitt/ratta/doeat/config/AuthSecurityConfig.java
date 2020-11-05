@@ -74,6 +74,7 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 					.antMatchers("/error.go").permitAll()
 					.antMatchers("/static/**", "/home", "/", "/join**", "/gallery").permitAll()
+					//.antMatchers("/join**").access("isAnonymous()")//익명사용자SpEL 가 true면 억세스.--로그인하면 회원가입못가게--에러페이지로감
 					.antMatchers("/admin**","/admin/**").hasAuthority("ROLE_ADMIN") //hasAuthority DB용
 					.antMatchers("/user/**").hasAuthority("ROLE_USER")
 					.anyRequest().authenticated() //어떤 롤이든 상관없이 인증만되면 된다. 나머지 모든 리퀘스트는 인증이 필요하다
