@@ -10,7 +10,7 @@ function like(gIdx) {
 	console.log(`-- request to send -- post ${gIdx} like +1`);
 		
 	let xhr = new XMLHttpRequest();
-	xhr.open('GET', '/gallery_like?gIdx=' + gIdx, true);
+	xhr.open('GET', 'gallery_like?gIdx=' + gIdx, true);
 	
 	xhr.onload = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -36,7 +36,7 @@ function scrap(gIdx) {
 	console.log(`-- request to send -- post ${gIdx} scarp +1`);
 		
 	let xhr = new XMLHttpRequest();
-	xhr.open('GET', '/gallery_scrap?gIdx=' + gIdx, true);
+	xhr.open('GET', 'gallery_scrap?gIdx=' + gIdx, true);
 	
 	xhr.onload = function() {
 		if (this.readyState == 4 && this.status == 200) {
