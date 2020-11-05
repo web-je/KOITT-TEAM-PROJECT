@@ -15,6 +15,9 @@
 
 
 	접속 테스트 페이지.
+	토큰 : [[${_csrf.token}]] <br/>
+    토큰 헤더 이름: [[${_csrf.headerName}]]<br/>
+	토큰 파라미터 이름:[[${_csrf.parameterName}]]<br/>
 	
 	
 	<h1 th:inline="text">Hello <span th:text="${userName}" ></span> [[${#httpServletRequest.remoteUser}]]!</h1>

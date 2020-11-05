@@ -73,17 +73,19 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests()
 					.antMatchers("/error.go").permitAll()
-					.antMatchers("/static/**", "/home", "/", "/join**", "/gallery").permitAll()
-					//.antMatchers("/join**").access("isAnonymous()")//익명사용자SpEL 가 true면 억세스.--로그인하면 회원가입못가게--에러페이지로감
+					//.antMatchers("/static/**", "/home", "/", "/join**", "/gallery").permitAll()
+					.antMatchers("/**").permitAll()
+					//.antMatchers("/join**").access("isAnonymous()")
 					.antMatchers("/admin**","/admin/**").hasAuthority("ROLE_ADMIN") //hasAuthority DB용
 					.antMatchers("/user/**").hasAuthority("ROLE_USER")
-					.anyRequest().authenticated() //어떤 롤이든 상관없이 인증만되면 된다. 나머지 모든 리퀘스트는 인증이 필요하다
+					.anyRequest().authenticated() //어떤 롤이든 상관없이 인증만
 					.and()
-//				.csrf()
-//					.ignoringAntMatchers("/member/member_join.do") //제외
+				.csrf()
+					.ignoringAntMatchers("/**")
+//					.ignoringAntMatchers("/member/member_join.do")
 //					.ignoringAntMatchers("/login.do")
 //					.ignoringAntMatchers("/login_error.do")
-//					.and()
+					.and()
 				.formLogin()
 					.loginPage("/login.go")
 					// .loginProcessingUrl("/login.do")
@@ -96,13 +98,13 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 				.logout()
 					.permitAll()
 					.logoutUrl("/logout.go")
-					.deleteCookies("JSESSIONID") //쿠키는 클라이언트에만 저장. 안해도 되지만 확실하게 브라우저 제이세션까지 모두 삭제. 
+					.deleteCookies("JSESSIONID")
 					.and()
 				.exceptionHandling()
-					.accessDeniedPage("/accessDenied.go") // 권한이 없을경우 해당 url로 이동 /403대응
+					.accessDeniedPage("/accessDenied.go")
 					.and()
 				.sessionManagement() // 세션 제어
-					.maximumSessions(1) // 최대 동시 세션 사용수(중복 로그인 가능 설정시 활용) //한계정에서 여러명 XXX
+					.maximumSessions(1) // 최대 동시 세션 사용수
 					.expiredUrl("/login.do")
 					.sessionRegistry(sessionRegistry);
 

@@ -85,9 +85,8 @@ function sendFilter() {
 	
 	let xhr = new XMLHttpRequest();
 	
-	xhr.open('POST', '/filter_on', true);
+	xhr.open('POST', 'filter_on', true);
 	xhr.setRequestHeader('Content-Type', 'application/json');
-	
 	xhr.onload = function() {
 		if (this.readyState == 4 && this.status == 200){
 		

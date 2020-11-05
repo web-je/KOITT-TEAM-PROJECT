@@ -43,7 +43,7 @@ function addEvent(){
 function unFollow(uIdx) {
 	
 	let xhr = new XMLHttpRequest();
-	xhr.open('GET', '/unfollow?uIdx=' + uIdx, true);
+	xhr.open('GET', 'unfollow?uIdx=' + uIdx, true);
 	
 	xhr.onload = function() {
 		if (this.readyState == 4 && this.status == 200) {
@@ -63,7 +63,7 @@ function unFollow(uIdx) {
 function following(uIdx) {
 	
 	let xhr = new XMLHttpRequest();
-	xhr.open('GET', '/following?uIdx=' + uIdx, true);
+	xhr.open('GET', 'following?uIdx=' + uIdx, true);
 	
 	xhr.onload = function() {
 		if (this.readyState == 4 && this.status == 200) {
