@@ -1,6 +1,7 @@
 package koitt.ratta.doeat.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,8 @@ public class ComRecipeContoller {
 		model.addAttribute("list", service.getAll());
 		return "recipe/getAll";
 	}
-
+	
+	@Secured({ "ROLE_USER", "ROLE_ADMIN" })
 	@GetMapping("/recipeInsert")
 	public String home() {
 		return "recipe/insertDemo";

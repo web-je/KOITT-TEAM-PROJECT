@@ -14,4 +14,5 @@ public class MvcConfiguration implements WebMvcConfigurer {
 		.addPathPatterns("/join.go");
 		
 	}
+	 
 }
