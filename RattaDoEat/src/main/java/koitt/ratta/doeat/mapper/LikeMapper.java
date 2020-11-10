@@ -10,6 +10,11 @@ import koitt.ratta.doeat.domain.GalleryLikeVo;
 @Mapper
 public interface LikeMapper {
 	
+	@Select("SELECT g_l_idx"
+			+ " FROM gallery_like"
+			+ " WHERE u_idx=#{uIdx} AND g_idx=#{gIdx}")
+	public Integer isLike(GalleryLikeVo galleryLikeVo);
+	
 	@Insert("INSERT INTO gallery_like"
 			+ " VALUES(g_l_idx_seq.NEXTVAL, #{uIdx}, #{gIdx})")
 	public int addLike(GalleryLikeVo galleryLikeVo);

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <title>갤러리 목록</title>
@@ -7,6 +8,8 @@
 <script defer src="/RattaDoEat/js/gallery/postFilter.js"></script>
 <script defer src="/RattaDoEat/js/gallery/copyURL.js"></script>
 <script defer src="/RattaDoEat/js/gallery/follow.js"></script>
+<script sec:authorize="isAnonymous()" defer src="/RattaDoEat/js/gallery/followForHost.js">
+</script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>

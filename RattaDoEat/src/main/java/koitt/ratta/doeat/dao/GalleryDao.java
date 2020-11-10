@@ -7,6 +7,7 @@ import koitt.ratta.doeat.domain.GalleryListVo;
 public interface GalleryDao {
 
 	List<GalleryListVo> viewAll();
+	
+	List<GalleryListVo> viewAllByUser(int u_idx);
 
-	List<GalleryListVo> viewAllByUser(int uIdx);
 }

@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class GalleryListVo {
-
+	
+	// gallery 테이블 기준으로 left outer join
 	int gIdx;
 	int uIdx;
 	String content;
@@ -18,8 +19,17 @@ public class GalleryListVo {
 	int hit;
 	String type1;
 	String type2;
+	
+	// 유저 테이블에서 조인
+	
+	// 라이크 테이블 집계하여 조인
 	int likeCnt;
+	
+	// 스크랩 테이블 집계하여 조인 
 	int scrapCnt;
+	
+	// 팔로우 테이블 유저정보로 조회한 정보 삽입
+	// 조인 아님!
 	Boolean isFollow;
 	
 	@Builder

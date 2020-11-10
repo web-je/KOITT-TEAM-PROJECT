@@ -22,8 +22,8 @@ public class GalleryDaoImpl implements GalleryDao{
 	}
 
 	@Override
-	public List<GalleryListVo> viewAllByUser(int uIdx) {
-		return sqlSession.selectList(path + "viewAllByUser", uIdx);
+	public List<GalleryListVo> viewAllByUser(int u_idx) {
+		return sqlSession.selectList(path + "viewAllByUser", u_idx);
 	}
 	
 }

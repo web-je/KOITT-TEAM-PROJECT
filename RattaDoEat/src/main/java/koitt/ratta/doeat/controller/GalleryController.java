@@ -12,7 +12,6 @@ import koitt.ratta.doeat.domain.AccountEntity;
 import koitt.ratta.doeat.service.GalleryService;
 import lombok.extern.slf4j.Slf4j;
 /**
- * @author koitt04a
  * 11.03 수정 GW  : 갤러리 리스트 출력 viewAllGallery 에 세션으로 유저 정보 받는 코드 추가. 
  */
 @Slf4j
@@ -25,9 +24,22 @@ public class GalleryController {
 	// 갤러리 리스트 출력
 	@GetMapping("gallery")
 	public String viewAllGallery(Model model, HttpSession session) {
+		// 로그인 정보
 		AccountEntity userInfo = (AccountEntity) session.getAttribute("userInfo");
-		int loginUIdx = userInfo.getUIdx().intValue();
+		int loginUIdx = 0;
+		
+		// 로그인 정보 없을 경우
+		if (userInfo == null) {
+			log.info("host 갤러리 접속");
+			
+		// 로그인 정보 있을 경우
+		} else {
+			loginUIdx = userInfo.getUIdx().intValue();
+			log.info("유저 " + loginUIdx + " 갤러리 접속");
+		}
+		
 		model.addAttribute("gallery", service.viewAll(loginUIdx));
+		
 		return "galleryList";
 	}
 	
