@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import koitt.ratta.doeat.domain.GalleryListVo;
+import koitt.ratta.doeat.domain.GalleryVo;
 
 @Repository
 public class GalleryDaoImpl implements GalleryDao{
@@ -22,8 +23,18 @@ public class GalleryDaoImpl implements GalleryDao{
 	}
 
 	@Override
-	public List<GalleryListVo> viewAllByUser(int uIdx) {
-		return sqlSession.selectList(path + "viewAllByUser", uIdx);
+	public List<GalleryListVo> viewAllByUser(int u_idx) {
+		return sqlSession.selectList(path + "viewAllByUser", u_idx);
 	}
 	
+	@Override
+	public int insertG(GalleryVo galleryVo) {
+		return sqlSession.insert("insertG", galleryVo);
+	}
+
+	@Override
+	public GalleryVo viewDetail(int gIdx) {
+		GalleryVo galleryVo = sqlSession.selectOne("viewDetail", gIdx);
+		return galleryVo;
+	}
 }

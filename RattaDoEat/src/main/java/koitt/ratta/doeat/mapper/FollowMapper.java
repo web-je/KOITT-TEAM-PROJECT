@@ -13,7 +13,7 @@ public interface FollowMapper {
 	@Select("SELECT COUNT(ROWNUM)"
 			+ " FROM follow"
 			+ " WHERE from_u_idx = #{fromUIdx} AND to_u_idx = #{toUIdx}")
-	public int isFollow(FollowVo followVo);
+	public Integer isFollow(FollowVo followVo);
 	
 	@Insert("INSERT INTO follow"
 			+ " VALUES(f_idx_seq.NEXTVAL, #{fromUIdx}, #{toUIdx})")

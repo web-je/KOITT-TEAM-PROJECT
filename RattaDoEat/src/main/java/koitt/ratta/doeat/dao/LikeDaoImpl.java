@@ -6,6 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import koitt.ratta.doeat.domain.GalleryLikeVo;
 
+/**
+ * 
+ * @author seanxxo
+ * @since
+ *
+ */
 @Repository
 public class LikeDaoImpl implements LikeDao {
 	
@@ -13,6 +19,14 @@ public class LikeDaoImpl implements LikeDao {
 	private SqlSession sqlSession;
 	
 	String path = "koitt.ratta.doeat.mapper.LikeMapper.";
+
+	// galleryLike DB 존재여부
+	// 존재시 return g_l_idx
+	// 존재하지 않을 시 return 0
+	@Override
+	public int isLike(GalleryLikeVo galleryLikeVo) {
+		return sqlSession.selectOne(path + "isLike", galleryLikeVo);
+	}
 
 	@Override
 	public int addLike(GalleryLikeVo galleryLikeVo) {

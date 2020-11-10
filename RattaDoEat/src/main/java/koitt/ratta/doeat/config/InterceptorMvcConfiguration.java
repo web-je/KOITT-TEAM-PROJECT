@@ -21,4 +21,5 @@ public class InterceptorMvcConfiguration implements WebMvcConfigurer {
 		.addPathPatterns("/join.go");
 		
 	}
+	 
 }

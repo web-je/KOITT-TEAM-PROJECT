@@ -13,6 +13,7 @@ function addEvent(){
 	const isFollowFalses = document.querySelectorAll(`.isFollowFalse`);
 	
 	isFollowTrues.forEach(function(isFollowTrue){
+		
 		isFollowTrue.onmouseover = function() {
 			this.textContent = `unFollow`;
 		}
@@ -25,19 +26,19 @@ function addEvent(){
 		}
 	});
 	
-	isFollowFalses.forEach(function(isFollowfalse){
-		isFollowfalse.onmouseover = function() {
+	isFollowFalses.forEach(function(isFollowFalse){
+		isFollowFalse.onmouseover = function() {
 			this.textContent = `goFollow`;
 		}
-		isFollowfalse.onmouseout = function() {
+		isFollowFalse.onmouseout = function() {
 			this.textContent = `follow`;
 		}
-		isFollowfalse.onclick = function() {
+		isFollowFalse.onclick = function() {
 			let uIdx = this.className.charAt(this.className.length-1);
+			console.log(uIdx);
 			following(uIdx);
 		}
 	});
-	
 }
 
 function unFollow(uIdx) {
