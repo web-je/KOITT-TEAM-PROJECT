@@ -16,7 +16,7 @@ public class FileUploadDaoImpl implements FileUploadDao {
 	
 	@Override
 	public int insertP(FileVo fileVo) {
-		return sqlSession.insert("insetP", fileVo);
+		return sqlSession.insert("insertP", fileVo);
 	}
 
 	@Override
