@@ -15,7 +15,7 @@ import koitt.ratta.doeat.service.GalleryService;
 import lombok.extern.slf4j.Slf4j;
 /**
  * 
- * @author seanxxo
+ * @author seanxxo, 송정은
  * 
  */
 @Slf4j
