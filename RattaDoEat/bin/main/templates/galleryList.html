@@ -4,11 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <title>갤러리 목록</title>
-<script defer src="/RattaDoEat/js/gallery/postAction.js"></script>
-<script defer src="/RattaDoEat/js/gallery/postFilter.js"></script>
-<script defer src="/RattaDoEat/js/gallery/copyURL.js"></script>
-<script defer src="/RattaDoEat/js/gallery/follow.js"></script>
-<script sec:authorize="isAnonymous()" defer src="/RattaDoEat/js/gallery/followForHost.js">
+<script type="text/javascript" th:src="@{resources/js/gallery/postAction.js}" defer></script>
+<script type="text/javascript" th:src="@{resources/js/gallery/postFilter.js}" defer></script>
+<script type="text/javascript" th:src="@{resources/js/gallery/copyURL.js}" defer></script>
+<script type="text/javascript" th:src="@{resources/js/gallery/follow.js}" defer></script>
+<script sec:authorize="isAnonymous()" type="text/javascript" th:src="@{resources/js/gallery/forHost.js}" defer>
 </script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
@@ -78,7 +78,7 @@
 			<div>
 				<a th:href="@{/post(gIdx=${post.gIdx})}" th:id="${'goPost' + post.gIdx}">[[${post.gIdx}]]</a>
 				<span>[[${post.content}]]</span>
-				<span th:onclick="like([[${post.gIdx}]])">like</span>
+				<span th:onclick="like([[${post.gIdx}]])" class="like">like</span>
 				<span th:id="${'like_cnt' + post.gIdx}">[[${post.likeCnt}]]</span>
 				<span th:onclick="scrap([[${post.gIdx}]])">scrap</span>
 				<span th:id="${'scrap_cnt' + post.gIdx}">[[${post.scrapCnt}]]</span>
