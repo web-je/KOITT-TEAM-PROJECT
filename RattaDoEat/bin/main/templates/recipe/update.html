@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script th:src="@{'/ckeditor5/ckeditor.js'}"></script>
+
+</head>
+<body>
+	<h1>레시피북 수정 페이지</h1>
+
+	<form th:action="@{/update}" method="post">
+	<textarea name="content" id="content" th:field="${rIdxList.content}"></textarea>
+		<input type="hidden" th:field="${rIdxList.rIdx}">
+		<input type="hidden" th:field="${rIdxList.uIdx}">
+		<input type="hidden" th:field="${rIdxList.hit}">
+		<input type="hidden" th:field="${rIdxList.likeNum}">
+		<input type="hidden" th:field="${rIdxList.scrapNum}">
+		<input type="submit" value="수정" id="btn">
+	</form>
+	
+	<script>
+	    ClassicEditor
+		.create( document.querySelector( '#content' ), {
+			ckfinder: {
+				
+				uploadUrl:  "[[@{'/imageUploadCK5?command=QuickUpload&type=Images&responseType=json'}]]"
+			},
+			toolbar: [ 'ckfinder', 'imageUpload', '|', 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo' ]
+		} )
+		.then( editor => {
+	        console.log( 'Editor was initialized', editor );
+	        myEditor = editor;
+	    } )
+		.catch( error => {
+		    console.error( error );
+		} );
+    </script>
+</body>
+</html>
