@@ -6,6 +6,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * 
+ * @author seanxxo
+ * @since 
+ * 
+ */
 @Getter
 @NoArgsConstructor
 public class GalleryListVo {

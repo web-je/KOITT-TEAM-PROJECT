@@ -6,6 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import koitt.ratta.doeat.domain.GalleryLikeVo;
 
+/**
+ * 
+ * @author seanxxo
+ * @since
+ *
+ */
 @Repository
 public class LikeDaoImpl implements LikeDao {
 	

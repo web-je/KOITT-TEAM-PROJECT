@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>getAll</title>
+<style>
+table, td {
+	border: 1px solid;
+}
+a {
+	text-decoration:none
+}
+</style>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script> 
+// 	//escape 문자로 변환
+// 	String.prototype.escapeHtml = function(){
+// 		return this.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/\"/g, "&quot;");
+// 	};
+
+	//escape 문자 (&문자) 변환 ex) &lt; -> <
+	String.prototype.unescapeHtml = function(){
+	    return this.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, "\"");
+	  };
+	  
+	function parseHTML(id, content){
+		$(function(){
+			console.log("id: "+ id);
+			console.log("content: "+ content);
+			$('#'+id).html(content.unescapeHtml());
+		});
+	}
+</script>
+</head>
+<body>
+	<h1>레시피북 목록 페이지</h1>
+	<table>
+		<tr>
+			<td>rIdx</td>
+			<td>uIdx</td>
+			<td>content</td>
+			<td>hit</td>
+			<td>likeNum</td>
+			<td>scrapNum</td>
+			<td>regDate</td>
+			<td>modifyDate</td>
+			<td>수정/삭제</td>
+		</tr>
+
+		<tr th:each="con : ${list}">
+			<td th:text="${con.rIdx}"></td>
+			<td th:text="${con.uIdx}"></td>
+		
+			<td><a th:href="@{/detail(rIdx=${con.rIdx})}" th:id="${'content_'+con.rIdx}"></a></td>
+			<script> //escape 문자를 html 로 parsing
+        		parseHTML("content_[[${con.rIdx}]]", "[[${con.content}]]");
+        	</script>
+        	
+			<td th:text="${con.hit}"></td>
+
+			<td><span th:text="${con.likeNum}"></span>
+			<br>
+			<a th:href="@{/likeNumUpdate(rIdx=${con.rIdx})}">
+				<button>좋아요</button>
+			</a></td>
+			
+			<td><span th:text="${con.scrapNum}"></span>
+			<br>
+			<a th:href="@{/scrapNumUpdate(rIdx=${con.rIdx})}">
+				<button>스크랩</button>
+			</a></td>
+			
+			<td th:text="${con.regDate}"><br></td>
+			<td th:text="${con.modifyDate}"></td>
+			<!--         <td><input type="button" value="수정" th:href="@{/update(rIdx=${con.rIdx})}"></td> -->
+			<td><a th:href="@{/updatePage(rIdx=${con.rIdx})}">수정</a><br><a th:href="@{/delete(rIdx=${con.rIdx})}">삭제</a></td>
+		</tr>
+	</table>
+
+</body>
+</html>

@@ -7,8 +7,10 @@ import koitt.ratta.doeat.dao.LikeDao;
 import koitt.ratta.doeat.domain.GalleryLikeVo;
 
 /**
+ * 
  * @author seanxxo
  * @since
+ * 
  */
 @Service
 public class LikeServiceImpl implements LikeService{
@@ -17,7 +19,7 @@ public class LikeServiceImpl implements LikeService{
 	LikeDao likeDao;
 	
 	/**
-	 * gallery_like 테이블에 좋아요 데이터를 삽입합니다.
+	 * gallery_like 테이블에 데이터를 삽입
 	 * 
 	 * @param 좋아요 한 유저, 게시글 번호
 	 * @return 게시글 좋아요 횟수

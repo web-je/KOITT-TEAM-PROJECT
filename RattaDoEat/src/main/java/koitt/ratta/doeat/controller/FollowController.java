@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import koitt.ratta.doeat.service.FollowService;
 import koitt.ratta.doeat.service.GalleryService;
 
+/**
+ * 
+ * @author seanxxo
+ *
+ */
 @Controller
 public class FollowController {
 	

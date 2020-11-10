@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>[[${user}]]님의 마이페이지</title>
+</head>
+<body>
+	<h1> 마이 페이지 테스트 </h1>
+	<p th:text="${session.userInfo.uIdx}"></p>
+	<div>
+		<span>[[${user}]]님의 유저 정보</span>
+	</div>
+	<div>
+		<div>[[${user}]]님의 갤러리 글</div>
+		<span th:each = "post : ${gallery}">
+			[[${post.gIdx}]]번 글 좋아요 수 [[${post.likeCnt}]] //
+		</span>
+	</div>
+</body>
+</html>
