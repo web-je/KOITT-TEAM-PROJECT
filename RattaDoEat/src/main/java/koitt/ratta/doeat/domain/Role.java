@@ -1,6 +1,3 @@
-/**
- * 작성자 GW
- */
 package koitt.ratta.doeat.domain;
 
 import javax.persistence.Column;
@@ -18,6 +15,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 유저의 권한 모델 클래스.
+ * 
+ * @author GW
+ *
+ */
 @Entity
 @Table(name="user_roles")
 @Data

@@ -1,6 +1,3 @@
-/**
- * 작성자 GW
- */
 package koitt.ratta.doeat.config;
 
 import java.io.IOException;
@@ -14,11 +11,15 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 import lombok.extern.slf4j.Slf4j; 
- 
+ /**
+  * 커스텀 프로바이더 실패 핸들러
+  * 
+  * @author GW
+  */
 @Slf4j
 public class CustomAuthenticationFailure extends SimpleUrlAuthenticationFailureHandler { // implements AuthenticationFailureHandler {
-	
-    // 로그인 실패시 username을 화면에 그대로 출력하도록 하기 위해 아래와 같은 핸들러를 작성
+
+	//로그인 실패시 아래 메소드를 탑니다.
 	@Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException exception) throws IOException, ServletException {
@@ -29,4 +30,5 @@ public class CustomAuthenticationFailure extends SimpleUrlAuthenticationFailureH
 		super.onAuthenticationFailure(request, response, exception);
 
     }
+	
 }

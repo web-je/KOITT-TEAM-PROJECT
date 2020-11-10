@@ -6,6 +6,19 @@
     <title>Home</title>
  <script sec:authorize="isAnonymous()">
  	alert("갤럭시 S10+ 에 당첨되셨습니다. 회원가입 후 경품을 수령해주세요.");
+	// document.querySelectorAll('.test').;
+	 //document.querySelector('.test').onclick = conTest();
+	 let tset = document.getElementById("test");
+	 tset.onclick =conTest();
+	 
+	 document.querySelector('#test').onclick = function() { 
+		    alert('bla bla'); 
+		}
+
+	
+ 	function conTest(){
+ 		console.log("자동");
+ 	}
  </script>
 </head>
 <body>
@@ -32,5 +45,8 @@
 		[[${login}]]
 		
 	
+		<div class="test" id="test">
+			붕
+		</div>
 </body>
 </html>

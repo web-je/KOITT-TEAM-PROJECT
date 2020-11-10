@@ -7,6 +7,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 회원 정보 DTO
+ * 회원 가입할 때, 회원 정보 변경 시에 사용.
+ * 
+ * @author GW
+ *
+ */
 @NoArgsConstructor
 @Data
 public class AccountDto {

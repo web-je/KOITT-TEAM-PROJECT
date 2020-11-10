@@ -25,12 +25,18 @@ import koitt.ratta.doeat.domain.Users;
 import koitt.ratta.doeat.domain.UsersRepository;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 회원 계정 서비스를 구현한 클래스.
+ * 
+ * @author GW
+ *
+ */
 @Slf4j
 @Service
 public class AccountServiceImpl implements  AccountService{
+
 	@Autowired
 	private AccountRepository accountRepository;
-	
 	@Autowired
 	private RoleRepository roleRepository;
 	@Autowired
@@ -42,7 +48,7 @@ public class AccountServiceImpl implements  AccountService{
 	private Role role = new Role();
 	private Users users = new Users();
 	
-	//회원가입 서비스
+	//유저 회원가입
 	@Transactional
 	@Override
 	public void saveUser(AccountDto dto) throws Exception {
@@ -69,7 +75,7 @@ public class AccountServiceImpl implements  AccountService{
 		log.info("계정 서비스 saveUser 의 role : "+ role);
 	}
 	
-	//username(=userId)로 유저 인포 찾기
+	//username(=userId 이메일 아이디)로 유저 정보 "userInfo" 찾기
 	@Override
 	public AccountEntity findByUserIdService(String userId) throws Exception{
 		return accountRepository.findByUserId(userId);

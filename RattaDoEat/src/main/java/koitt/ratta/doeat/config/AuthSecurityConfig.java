@@ -24,8 +24,9 @@ import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @author javateam
- *
+ * 시큐리티 설정
+ * 
+ * @author GW
  */
 @Slf4j
 @Configuration
@@ -36,7 +37,7 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private SessionRegistry sessionRegistry; //세션 등록 담당빈
 	@Autowired
-	private DataSource dataSource; // 추가
+	private DataSource dataSource; // jdbc 사용을 위해 추가
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -66,6 +67,7 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(customProvider);
 	}
 
+	//시큐리티 실제 설정 메소드
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
@@ -76,7 +78,7 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 					//.antMatchers("/static/**", "/home", "/", "/join**", "/gallery").permitAll()
 					.antMatchers("/**").permitAll()
 					//.antMatchers("/join**").access("isAnonymous()")
-					.antMatchers("/admin**","/admin/**").hasAuthority("ROLE_ADMIN") //hasAuthority DB용
+					.antMatchers("/admin**","/admin/**").hasAuthority("ROLE_ADMIN")
 					.antMatchers("/user/**").hasAuthority("ROLE_USER")
 					.anyRequest().authenticated() //어떤 롤이든 상관없이 인증만
 					.and()
@@ -101,11 +103,11 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 					.deleteCookies("JSESSIONID")
 					.and()
 				.exceptionHandling()
-					.accessDeniedPage("/accessDenied.go")
+					.accessDeniedPage("/accessDenied.go") //권한 없으면 이곳으로 이동.
 					.and()
 				.sessionManagement() // 세션 제어
 					.maximumSessions(1) // 최대 동시 세션 사용수
-					.expiredUrl("/login.do")
+					.expiredUrl("/login.go")
 					.sessionRegistry(sessionRegistry);
 
 		//리멤버미 아직 구현안함 ----------
@@ -118,6 +120,8 @@ public class AuthSecurityConfig extends WebSecurityConfigurerAdapter {
 		 */
 		http.rememberMe().key("javateam").userDetailsService(userDetailsService).tokenRepository(getJDBCRepository())
 				.tokenValiditySeconds(60 * 60 * 24); // 24시간(1일)
+	
+	
 	}
 
 	// 추가된 remember-me 관련 메서드

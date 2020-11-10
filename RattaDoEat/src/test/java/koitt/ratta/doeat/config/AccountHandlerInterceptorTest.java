@@ -9,6 +9,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+/**
+ * 계정 인터셉터 핸들러 테스트
+ * 
+ * @author GW
+ *
+ */
 @SpringBootTest
 public class AccountHandlerInterceptorTest extends HandlerInterceptorAdapter{
 

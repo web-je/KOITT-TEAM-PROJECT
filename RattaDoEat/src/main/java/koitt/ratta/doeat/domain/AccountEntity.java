@@ -1,6 +1,3 @@
-/**
- * 작성자 GW
- */
 package koitt.ratta.doeat.domain;
 
 import java.math.BigDecimal;
@@ -29,6 +26,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * 회원 정보 엔티티
+ * 
+ * @author GW
+ *
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -41,7 +44,7 @@ public class AccountEntity {
 	@Id //해당필드 pk설정
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "USER_INFO_SEQ_GEN")
 	@Column(name="u_idx")
-	private BigDecimal uIdx; //long 에서 빅데시마로 변경, 오라클 오류.
+	private BigDecimal uIdx; //long 에서 빅데시마로 변경, 오라클 오류 대비.
 	
 	
 	@Column(name="user_id")
@@ -63,6 +66,7 @@ public class AccountEntity {
 	@Column
 	private String address;
 	
+	//계정 엔티티 빌더, dto에서 엔티티로 
 	@Builder
 	public void accountEntityFromDto(AccountDto dto) {
 		this.uIdx = dto.getUIdx();

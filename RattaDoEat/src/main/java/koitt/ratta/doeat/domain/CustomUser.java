@@ -1,6 +1,3 @@
-/**
- * 작성자 GW
- */
 package koitt.ratta.doeat.domain;
 
 import java.util.Collection;
@@ -17,7 +14,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-//@Data
+/**
+ * 커스텀유저 모델 클래스. 
+ * UserDetails를 구현하며 시큐리티에 사용됩니다.
+ * 
+ * @author GW
+ *
+ */
 @Getter
 @Setter
 @ToString

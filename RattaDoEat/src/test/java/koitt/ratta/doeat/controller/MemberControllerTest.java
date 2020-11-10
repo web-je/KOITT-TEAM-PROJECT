@@ -17,6 +17,12 @@ import static org.springframework.security.test.web.servlet.response.SecurityMoc
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 멤버 컨트롤러 테스트. 시큐리티가 들어갑니다.
+ * 
+ * @author GW
+ *
+ */
 @SpringBootTest
 @WebAppConfiguration
 @Slf4j

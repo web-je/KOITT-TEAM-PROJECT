@@ -11,6 +11,12 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import koitt.ratta.doeat.domain.AccountEntity;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 계정 서비스 클래스 테스트
+ * 
+ * @author GW
+ *
+ */
 @SpringBootTest
 @WebAppConfiguration
 @Slf4j

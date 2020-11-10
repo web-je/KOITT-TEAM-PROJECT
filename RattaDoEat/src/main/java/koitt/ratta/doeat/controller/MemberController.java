@@ -1,10 +1,6 @@
 
 package koitt.ratta.doeat.controller;
 
-/**
- * @author GW
- * 작성일 2020-10-26
- */
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,6 +24,13 @@ import koitt.ratta.doeat.service.AccountService;
 import koitt.ratta.doeat.service.AccountServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 멤버 컨트롤러
+ * 기능 : 로그인과 회원가입 관련 기능, 멤버 정보 CRUD, 권한 대응 오류 페이지
+ * 
+ * @author GW
+ * @since 2020-10-26
+ */
 @Slf4j
 @Controller
 public class MemberController {
@@ -42,12 +45,12 @@ public class MemberController {
 		return "home";
 	}
 	
-	//로그인 세션 정보 저장. 
+	//로그인 성공시에 로그인 세션 정보 저장. 
 	@RequestMapping("login.do")
 	public String doLogin(Model model, HttpServletRequest request) {
 
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserDetails user = (UserDetails)principal;
+		UserDetails user = (UserDetails)principal; //유저디테일즈로 강제 타입 변환
 		log.info(" ~~~~~ 컨트롤러 로그인 user : " + user);
 		
 		try {
@@ -71,21 +74,21 @@ public class MemberController {
 		return "hello";
 	}
 	
-	//로그인 페이지 이동
+	//로그인폼 페이지 이동
 	@RequestMapping("login.go")
 	public String goLogin() {
 		return "auth/login";
 	}
 	
 
-	//가입 페이지 이동
+	//회원가입폼 페이지 이동
 	@RequestMapping(value = {"join.go","join2.go"})
 	public String goJoin(Model model) {
 		model.addAttribute("accountDto", new AccountDto());
 		return "auth/join";
 	}
 
-	//가입, 유저 인포 저장.
+	//회원가입, 유저 인포 저장.
 	@RequestMapping("join.do")
 	public String doJoin(@ModelAttribute AccountDto accountDto, Model model) throws Exception {
 		
@@ -99,23 +102,23 @@ public class MemberController {
 			return "join.go";
 		}
 		
-		return "hello"; //환영 페이지, user info 폼 이동
+		return "hello"; //환영 페이지, 추후에 user info 폼 이동으로 변경 예정.
 	}
 		
 	//아이디 찾기 폼 이동
 	@RequestMapping("userFindId.go")
-	public String userFindIdGo (Model model) {
+	public String goUserFindId (Model model) {
 		return "auth/userFindId";
 	}
 		
 	//비밀번호 찾기 폼 이동 	
 	@RequestMapping("userFindPw.go")
-	public String userFindIdPw (Model model) {
+	public String goUserFindPw (Model model) {
 		return "auth/userFindPw";
 	}	
 	
-	//로그인 에러 
-	@RequestMapping("/error.go")
+	//로그인 에러 메세지 처리
+	@RequestMapping("/error.go") //loginError.go 변경예정
 	public String goLoginError(Model model, HttpSession session) {
 		
 		// Spring CustomProvider 인증(Auth) 에러 메시지 처리
@@ -144,7 +147,7 @@ public class MemberController {
 	
 	//어드민 테스트 페이지 
 	@RequestMapping("admin.go")
-	public String goAdmin(Model model) {
+	public String goAdminPage(Model model) {
 		return "admin/admin";
 	}
 	//user 테스트 페이지 
@@ -160,12 +163,14 @@ public class MemberController {
 		return "user/mypage";
 	}
 	
-	@RequestMapping("logout.go") //시큐리티 이동, 페이지 단순이동 
+	//시큐리티 이동, 로그아웃 성공시 페이지 단순이동 
+	@RequestMapping("logout.go") 
 	public String doLogout() {
 		return "auth/logout";
 	}
 	
-	@RequestMapping("logout_proc.go") //실제 로그아웃.
+	//실제 로그아웃 기능.
+	@RequestMapping("logout_proc.go") 
 	public String goLogout(HttpServletRequest request,
 							HttpServletResponse response) {
 		Authentication auth 

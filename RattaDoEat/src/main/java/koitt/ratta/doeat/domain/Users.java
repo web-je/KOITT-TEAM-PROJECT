@@ -1,6 +1,3 @@
-/**
- * 작성자 GW
- */
 package koitt.ratta.doeat.domain;
 
 import javax.persistence.Column;
@@ -12,7 +9,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+/**
+ * Users 모델 클래스.
+ * 
+ * @author GW
+ *
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
