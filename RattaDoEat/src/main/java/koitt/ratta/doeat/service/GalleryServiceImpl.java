@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import koitt.ratta.doeat.dao.FollowDao;
 import koitt.ratta.doeat.dao.GalleryDao;
 import koitt.ratta.doeat.domain.GalleryListVo;
+import koitt.ratta.doeat.domain.GalleryVo;
 import koitt.ratta.doeat.domain.FollowVo;
 
 @Service
@@ -97,4 +98,18 @@ public class GalleryServiceImpl implements GalleryService{
 		return gallery;
 	}
 	
+	@Override
+	public int insertG(GalleryVo vo) {
+		return dao.insertG(vo);
+	}
+
+	@Override
+	public GalleryVo viewDetail(int gIdx) {
+		return dao.viewDetail(gIdx);
+	}
+
+//	@Override
+//	public String userName(int gIdx) {
+//		return mapper.userName(gIdx);
+//	}
 }
