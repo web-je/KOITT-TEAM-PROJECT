@@ -8,7 +8,7 @@ import koitt.ratta.doeat.domain.GalleryLikeVo;
 
 /**
  * 
- * @author seanxxo
+ * @author 진민영
  * @since
  * 
  */
@@ -22,7 +22,7 @@ public class LikeServiceImpl implements LikeService{
 	 * gallery_like 테이블에 데이터를 삽입
 	 * 
 	 * @param 좋아요 한 유저, 게시글 번호
-	 * @return 게시글 좋아요 횟수
+	 * @return 게시글 좋아요 수
 	 */
 	@Override
 	public int addLike(GalleryLikeVo galleryLikeVo) {
@@ -30,7 +30,7 @@ public class LikeServiceImpl implements LikeService{
 		// 좋아요 존재 여부 조회
 		int isLike = likeDao.isLike(galleryLikeVo);
 		
-		// 존재하지 않을 시 좋아요 데이터 삽입
+		// 존재하지 않을 시에만 좋아요 데이터 삽입
 		if (isLike == 0) {
 			likeDao.addLike(galleryLikeVo);
 		}

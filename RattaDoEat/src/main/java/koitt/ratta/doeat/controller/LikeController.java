@@ -11,13 +11,25 @@ import koitt.ratta.doeat.domain.AccountEntity;
 import koitt.ratta.doeat.domain.GalleryLikeVo;
 import koitt.ratta.doeat.service.LikeService;
 
+/**
+ * 
+ * @author 진민영
+ *
+ */
 @RestController
 public class LikeController {
 	
 	@Autowired
 	LikeService service;
 	
-	// 갤러리 게시글 좋아요
+	/**
+	 * 갤러리 좋아요 데이터 삽입
+	 * 
+	 * @param gIdx 게시글 인덱스
+	 * @param model
+	 * @param session
+	 * @return 좋아요 횟수
+	 */
 	@GetMapping("gallery_like")
 	public int addLike(int gIdx, Model model, HttpSession session) {
 		
@@ -31,5 +43,4 @@ public class LikeController {
 		
 		return service.addLike(galleryLikeVo);
 	}
-
 }

@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * 
- * @author seanxxo
+ * 갤러리 게시판 리스트를 위한 vo
+ * @author 진민영
  * @since 
  * 
  */
@@ -34,13 +35,16 @@ public class GalleryListVo {
 	// 스크랩 테이블 집계하여 조인 
 	int scrapCnt;
 	
+	// 이하의 필드는 테이블에 포함된 데이터가 아닙니다 (조인 아님)
+	// 좋아요 여부 유저정보로 조회한 정보 삽입
+	Boolean isLike;
+	
 	// 팔로우 테이블 유저정보로 조회한 정보 삽입
-	// 조인 아님!
 	Boolean isFollow;
 	
 	@Builder
 	public GalleryListVo(int gIdx, int uIdx, String content, LocalDateTime regDate, LocalDateTime modifyDate, int hit,
-			String type1, String type2, int likeCnt, int scarpCnt, Boolean isFollow) {
+			String type1, String type2, int likeCnt, int scarpCnt, Boolean isLike, Boolean isFollow) {
 		this.gIdx = gIdx;
 		this.uIdx = uIdx;
 		this.content = content;
@@ -51,6 +55,7 @@ public class GalleryListVo {
 		this.type2 = type2;
 		this.likeCnt = likeCnt;
 		this.scrapCnt = scarpCnt;
+		this.isLike = isLike;
 		this.isFollow = isFollow;
 	}
 	
