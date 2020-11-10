@@ -142,7 +142,7 @@ function upload() {
 		success: function(data) {
 			if(data == "success"){
 				alert("등록이 완료되었습니다.")
-				document.location.href="/";
+				document.location.href="/RattaDoEat/gallery";
 			}
 		},
 		error: function () {

@@ -53,7 +53,7 @@ public class FileUploadController {
 		String fileNameExtension; // 파일 확장자 
 		String uuidFileName; // 파일 uuid
 //		String path = "C:\\Users\\koitt04a\\Downloads\\RattaDoEat\\src\\main\\resources\\upload\\";
-		String path = "C:\\workSpace\\RattaDoEat\\src\\main\\resources\\static\\upload\\";
+		String path = "C:\\workSpace\\KoittTemaPjt\\RattaDoEat\\src\\main\\resources\\static\\upload\\"; // 일단 절대경로로 변경하여 해주세요.
 		String saveFile; // 경로 + 암호화된 파일 이름
 		
 		try {
