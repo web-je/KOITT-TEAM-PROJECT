@@ -14,7 +14,9 @@ import koitt.ratta.doeat.service.FileUploadService;
 import koitt.ratta.doeat.service.GalleryService;
 import lombok.extern.slf4j.Slf4j;
 /**
- * 11.03 수정 GW  : 갤러리 리스트 출력 viewAllGallery 에 세션으로 유저 정보 받는 코드 추가. 
+ * 
+ * @author seanxxo
+ * 
  */
 @Slf4j
 @Controller
@@ -26,7 +28,13 @@ public class GalleryController {
 	@Autowired
 	FileUploadService fileUploadService;
 	
-	// 갤러리 리스트 출력
+	/**
+	 * 갤러리 리스트 출력
+	 * <br>11.03 수정 GW  : 갤러리 리스트 출력 viewAllGallery 에 세션으로 유저 정보 받는 코드 추가. 
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("gallery")
 	public String viewAllGallery(Model model, HttpSession session) {
 		// 로그인 정보
