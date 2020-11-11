@@ -39,4 +39,10 @@ public class LikeServiceImpl implements LikeService{
 		return likeDao.viewLike(galleryLikeVo.getGIdx());
 	}
 
+	@Override
+	public int unLike(GalleryLikeVo galleryLikeVo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

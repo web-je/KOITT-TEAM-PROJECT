@@ -6,4 +6,6 @@ public interface LikeService {
 
 	int addLike(GalleryLikeVo galleryLikeVo);
 
+	int unLike(GalleryLikeVo galleryLikeVo);
+
 }

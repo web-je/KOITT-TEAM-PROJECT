@@ -65,6 +65,7 @@
 	</script>
 	<div class="wrap" id="galList">
 		<script th:inline="javascript">
+			// 인라인 타임리프 테스트 용
 // 			gal = [[${gallery}]];
 		</script>
 		<div th:each = "post : ${gallery}">
@@ -78,8 +79,14 @@
 			<div>
 				<a th:href="@{/post(gIdx=${post.gIdx})}" th:id="${'goPost' + post.gIdx}">[[${post.gIdx}]]</a>
 				<span>[[${post.content}]]</span>
-				<span th:onclick="like([[${post.gIdx}]])" class="like">like</span>
+				
+				<span th:if="${post.isLike}==true"
+					  th:onclick="like([[${post.gIdx}]])" class="like">like</span>
+				<span th:if="${post.isLike}==false"
+					  th:onclick="like([[${post.gIdx}]])" class="like">unlike</span>
+					  
 				<span th:id="${'like_cnt' + post.gIdx}">[[${post.likeCnt}]]</span>
+				
 				<span th:onclick="scrap([[${post.gIdx}]])">scrap</span>
 				<span th:id="${'scrap_cnt' + post.gIdx}">[[${post.scrapCnt}]]</span>
 				<span>[[${post.type1}]]</span>

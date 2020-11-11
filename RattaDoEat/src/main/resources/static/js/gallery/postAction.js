@@ -30,6 +30,32 @@ function like(gIdx) {
 }
 
 /**
+ * 게시글 좋아요 취소
+ */
+function unlike(gIdx) {
+	console.log(`-- request to send -- post ${gIdx} like -1`);
+		
+	let xhr = new XMLHttpRequest();
+	xhr.open('GET', 'gallery_unlike?gIdx=' + gIdx, true);
+	
+	xhr.onload = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			if (this.response == 0){	// 실패
+				return;
+			}else{	// 성공
+				document.querySelector('#like_cnt'+gIdx).textContent = this.response;
+			}
+		}
+	}
+	
+	xhr.onerror = function() {
+		console.log(this);
+	}
+		
+	xhr.send();
+}
+
+/**
  * 게시글 스크랩 +1
  */
 function scrap(gIdx) {

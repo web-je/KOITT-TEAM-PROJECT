@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import koitt.ratta.doeat.dao.FollowDao;
 import koitt.ratta.doeat.dao.GalleryDao;
+import koitt.ratta.doeat.dao.LikeDao;
 import koitt.ratta.doeat.domain.GalleryListVo;
 import koitt.ratta.doeat.domain.GalleryVo;
 import koitt.ratta.doeat.domain.FollowVo;
@@ -27,8 +28,12 @@ public class GalleryServiceImpl implements GalleryService{
 	@Autowired
 	FollowDao followDao;
 	
+	@Autowired
+	LikeDao likeDao;
+	
 	/**
-	 * 작성중 입니다
+	 * galleryList.html용 list 생성
+	 * @author 진민영
 	 */
 	@Override
 	public List<GalleryListVo> viewAll(int loginUIdx) {
@@ -54,43 +59,28 @@ public class GalleryServiceImpl implements GalleryService{
 			// 게시글 글쓴이를 기준으로 로그인 유저의 팔로우 여부 조회
 			followVo = FollowVo.builder().fromUIdx(loginUIdx)
 										 .toUIdx(post.getUIdx()).build();
+			boolean isFollow = followDao.isFollow(followVo) == 1;
+			
 			// 좋아요 여부 조회용 vo 생성
 			// 게시글을 기준으로 로그인 유저의 좋아요 여부 조회
 			likeVo = GalleryLikeVo.builder().gIdx(post.getGIdx())
 											.uIdx(loginUIdx).build();
+			boolean isLike = likeDao.isLike(likeVo) == 1;
 			
-			// 팔로우 테이블 존재시 true 삽입
-			if (followDao.isFollow(followVo) == 1) {
-				GalleryListVo tmpPost = GalleryListVo.builder()
-													 .gIdx(post.getGIdx())
-													 .uIdx(post.getUIdx())
-													 .content(post.getContent())
-													 .regDate(post.getRegDate())
-													 .modifyDate(post.getModifyDate())
-													 .hit(post.getHit())
-													 .type1(post.getType1())
-													 .type2(post.getType2())
-													 .likeCnt(post.getLikeCnt())
-													 .scarpCnt(post.getScrapCnt())
-													 .isFollow(true).build();
-				gallery.add(tmpPost);
-				
-			// 팔로우 테이블 존재하지 않을 시 false 삽입
-			} else if (followDao.isFollow(followVo) == 0){
-				GalleryListVo tmpPost = GalleryListVo.builder()
-													 .gIdx(post.getGIdx())
-													 .uIdx(post.getUIdx())
-													 .content(post.getContent())
-													 .regDate(post.getRegDate())
-													 .modifyDate(post.getModifyDate())
-													 .hit(post.getHit())
-													 .type1(post.getType1())
-													 .type2(post.getType2())
-													 .likeCnt(post.getLikeCnt())
-													 .scarpCnt(post.getScrapCnt())
-													 .isFollow(false).build();
-				gallery.add(tmpPost);
-			}
+			GalleryListVo tmpPost = GalleryListVo.builder().gIdx(post.getGIdx())
+														   .uIdx(post.getUIdx())
+														   .content(post.getContent())
+														   .regDate(post.getRegDate())
+														   .modifyDate(post.getModifyDate())
+														   .hit(post.getHit())
+														   .type1(post.getType1())
+														   .type2(post.getType2())
+														   .likeCnt(post.getLikeCnt())
+														   .scarpCnt(post.getScrapCnt())
+														   .isFollow(isFollow)
+														   .isLike(isLike).build();
+			
+			gallery.add(tmpPost);
 			
 		}
 		
