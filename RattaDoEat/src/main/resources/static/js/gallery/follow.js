@@ -9,7 +9,6 @@ addEvent();
 function addEvent(){
 
 	const isFollowTrues = document.querySelectorAll(`.isFollowTrue`);
-	
 	const isFollowFalses = document.querySelectorAll(`.isFollowFalse`);
 	
 	isFollowTrues.forEach(function(isFollowTrue){
@@ -35,7 +34,6 @@ function addEvent(){
 		}
 		isFollowFalse.onclick = function() {
 			let uIdx = this.className.charAt(this.className.length-1);
-			console.log(uIdx);
 			following(uIdx);
 		}
 	});

@@ -7,6 +7,6 @@ import koitt.ratta.doeat.domain.GalleryListVo;
 
 public interface FilterService {
 
-	List<GalleryListVo> changeFilter(Map<String, String[]> types);
+	List<GalleryListVo> changeFilter(Map<String, String[]> types, int loginUIdx);
 
 }

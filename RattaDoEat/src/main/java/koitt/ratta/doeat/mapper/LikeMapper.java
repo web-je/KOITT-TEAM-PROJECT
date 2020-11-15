@@ -1,5 +1,6 @@
 package koitt.ratta.doeat.mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -23,5 +24,9 @@ public interface LikeMapper {
 			+ " FROM gallery_list"
 			+ " WHERE g_idx=#{gIdx}")
 	public int viewLike(int gIdx);
+	
+	@Delete("DELETE gallery_like"
+			+ " WHERE u_idx=#{uIdx} AND g_idx=#{gIdx}")
+	public int unLike(GalleryLikeVo galleryLikeVo);
 
 }

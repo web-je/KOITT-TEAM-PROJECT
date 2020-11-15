@@ -2,6 +2,7 @@ package koitt.ratta.doeat.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import koitt.ratta.doeat.dao.GalleryDao;
 import koitt.ratta.doeat.dao.LikeDao;
 import koitt.ratta.doeat.domain.GalleryListVo;
 import koitt.ratta.doeat.domain.GalleryVo;
+import lombok.var;
 import koitt.ratta.doeat.domain.FollowVo;
 import koitt.ratta.doeat.domain.GalleryLikeVo;
 
@@ -67,20 +69,48 @@ public class GalleryServiceImpl implements GalleryService{
 											.uIdx(loginUIdx).build();
 			boolean isLike = likeDao.isLike(likeVo) == 1;
 			
-			GalleryListVo tmpPost = GalleryListVo.builder().gIdx(post.getGIdx())
-														   .uIdx(post.getUIdx())
-														   .content(post.getContent())
-														   .regDate(post.getRegDate())
-														   .modifyDate(post.getModifyDate())
-														   .hit(post.getHit())
-														   .type1(post.getType1())
-														   .type2(post.getType2())
-														   .likeCnt(post.getLikeCnt())
-														   .scarpCnt(post.getScrapCnt())
-														   .isFollow(isFollow)
-														   .isLike(isLike).build();
+			// 빌더 타입 추론
+			var builder = GalleryListVo.builder();
 			
-			gallery.add(tmpPost);
+			builder.gIdx(post.getGIdx())
+				   .uIdx(post.getUIdx())
+				   .content(post.getContent())
+				   .regDate(post.getRegDate())
+				   .modifyDate(post.getModifyDate())
+				   .hit(post.getHit())
+				   .type1(post.getType1())
+				   .type2(post.getType2())
+				   .nickname(post.getNickname())
+				   .name(post.getName())
+				   .likeCnt(post.getLikeCnt())
+				   .scarpCnt(post.getScrapCnt())
+				   .isFollow(isFollow)
+				   .isLike(isLike);
+			
+			// 갤러리 이미지 파일 uuid 구분자 기준으로 나누기
+			String[] images = post.getImgUuid().split("/");
+			
+			if (images[0] != null) {
+				builder.imgUuid(images[0]);
+			}
+			
+			if (images[1] != null) {
+				builder.imgUuid2(images[1]);
+			}
+			
+			if (images[2] != null) {
+				builder.imgUuid3(images[2]);
+			}
+			
+			if (images[3] != null) {
+				builder.imgUuid4(images[3]);
+			}
+			
+			if (images[4] != null) {
+				builder.imgUuid5(images[4]);
+			}
+			
+			gallery.add(builder.build());
 			
 		}
 		

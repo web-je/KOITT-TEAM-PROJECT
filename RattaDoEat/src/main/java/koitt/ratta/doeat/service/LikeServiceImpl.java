@@ -22,10 +22,9 @@ public class LikeServiceImpl implements LikeService{
 	 * gallery_like 테이블에 데이터를 삽입
 	 * 
 	 * @param 좋아요 한 유저, 게시글 번호
-	 * @return 게시글 좋아요 수
 	 */
 	@Override
-	public int addLike(GalleryLikeVo galleryLikeVo) {
+	public void addLike(GalleryLikeVo galleryLikeVo) {
 		
 		// 좋아요 존재 여부 조회
 		int isLike = likeDao.isLike(galleryLikeVo);
@@ -35,14 +34,23 @@ public class LikeServiceImpl implements LikeService{
 			likeDao.addLike(galleryLikeVo);
 		}
 		
-		// 좋아요 횟수 조회하여 리턴
-		return likeDao.viewLike(galleryLikeVo.getGIdx());
 	}
-
+	
+	/**
+	 * gallery_like 테이블에서 데이터를 삭제
+	 * 
+	 * @param galleryLikeVo 좋아요 한 유저, 게시글 번호
+	 */
 	@Override
-	public int unLike(GalleryLikeVo galleryLikeVo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void unLike(GalleryLikeVo galleryLikeVo) {
+		
+		// 좋아요 존재 여부 조회
+		int isLike = likeDao.isLike(galleryLikeVo);
+		
+		// 존재시에만 좋아요 데이터 삭제
+		if (isLike == 1) {
+			likeDao.unLike(galleryLikeVo);
+		}
 	}
 
 }

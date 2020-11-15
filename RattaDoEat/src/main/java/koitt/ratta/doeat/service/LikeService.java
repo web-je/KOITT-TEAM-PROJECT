@@ -4,8 +4,8 @@ import koitt.ratta.doeat.domain.GalleryLikeVo;
 
 public interface LikeService {
 
-	int addLike(GalleryLikeVo galleryLikeVo);
+	void addLike(GalleryLikeVo galleryLikeVo);
 
-	int unLike(GalleryLikeVo galleryLikeVo);
+	void unLike(GalleryLikeVo galleryLikeVo);
 
 }

@@ -7,7 +7,7 @@ import koitt.ratta.doeat.domain.GalleryVo;
 
 public interface GalleryService {
 
-	List<GalleryListVo> viewAll(int loginUIdx);
+	public List<GalleryListVo> viewAll(int loginUIdx);
 
 	// 게시물 작성
 	public int insertG(GalleryVo vo);

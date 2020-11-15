@@ -15,7 +15,7 @@ import koitt.ratta.doeat.service.GalleryService;
 import lombok.extern.slf4j.Slf4j;
 /**
  * 
- * @author seanxxo, 송정은
+ * @author 진민영, 송정은
  * 
  */
 @Slf4j
@@ -54,12 +54,6 @@ public class GalleryController {
 		model.addAttribute("gallery", galleryService.viewAll(loginUIdx));
 		
 		return "galleryList";
-	}
-	
-	@GetMapping("post")
-	public String viewGallery(Model model, int gIdx) {
-		model.addAttribute("gIdx", gIdx);
-		return "gallery";
 	}
 
 	/**

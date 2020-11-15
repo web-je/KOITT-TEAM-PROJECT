@@ -45,4 +45,12 @@ public class LikeDaoImpl implements LikeDao {
 	public int viewLike(int gIdx) {
 		return sqlSession.selectOne(path + "viewLike", gIdx);
 	}
+	
+	/**
+	 * 좋아요 데이터를 삭제하는 쿼리
+	 */
+	@Override
+	public int unLike(GalleryLikeVo galleryLikeVo) {
+		return sqlSession.delete(path + "unLike", galleryLikeVo);
+	}
 }

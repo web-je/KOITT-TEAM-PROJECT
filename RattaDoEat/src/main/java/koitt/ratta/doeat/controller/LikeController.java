@@ -3,12 +3,13 @@ package koitt.ratta.doeat.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import koitt.ratta.doeat.domain.AccountEntity;
 import koitt.ratta.doeat.domain.GalleryLikeVo;
+import koitt.ratta.doeat.service.GalleryService;
 import koitt.ratta.doeat.service.LikeService;
 
 /**
@@ -16,31 +17,37 @@ import koitt.ratta.doeat.service.LikeService;
  * @author 진민영
  *
  */
-@RestController
+@Controller
 public class LikeController {
 	
 	@Autowired
 	LikeService service;
+	
+	@Autowired
+	GalleryService galleryService;
 	
 	/**
 	 * 갤러리 좋아요 데이터 삽입
 	 * 
 	 * @param gIdx 게시글 인덱스
 	 * @param session 로그인 정보
-	 * @return 좋아요 횟수
+	 * @return 
 	 */
 	@GetMapping("gallery_like")
-	public int addLike(int gIdx, HttpSession session) {
+	public String addLike(int gIdx, HttpSession session, Model model) {
 		
 		// 로그인한 유저 인덱스
 		AccountEntity userInfo = (AccountEntity) session.getAttribute("userInfo");
 		int uIdx = userInfo.getUIdx().intValue();
 		
-		// 쿼리용 vo 생성해 서비스에 전달
+		// 좋아요 정보 vo 생성해 서비스에 전달
 		GalleryLikeVo galleryLikeVo = GalleryLikeVo.builder().uIdx(uIdx)
 															 .gIdx(gIdx).build();
+		service.addLike(galleryLikeVo);
 		
-		return service.addLike(galleryLikeVo);
+		// 전체 게시글 재조회하여 리턴
+		model.addAttribute("gallery", galleryService.viewAll(uIdx));
+		return "galleryList :: #galList";
 	}
 	
 	/**
@@ -48,10 +55,10 @@ public class LikeController {
 	 * 
 	 * @param gIdx 게시글 인덱스
 	 * @param session 로그인 정보
-	 * @return 좋아요 횟수
+	 * @return 
 	 */
 	@GetMapping("gallery_unlike")
-	public int unLike(int gIdx, HttpSession session) {
+	public String unLike(int gIdx, HttpSession session, Model model) {
 		
 		// 로그인한 유저 인덱스
 		AccountEntity userInfo = (AccountEntity) session.getAttribute("userInfo");
@@ -60,7 +67,10 @@ public class LikeController {
 		// 쿼리용 vo 생성해 서비스에 전달
 		GalleryLikeVo galleryLikeVo = GalleryLikeVo.builder().uIdx(uIdx)
 															 .gIdx(gIdx).build();
+		service.unLike(galleryLikeVo);
 		
-		return service.unLike(galleryLikeVo);
+		// 전체 게시글 재조회하여 리턴
+		model.addAttribute("gallery", galleryService.viewAll(uIdx));
+		return "galleryList :: #galList"; 
 	}
 }

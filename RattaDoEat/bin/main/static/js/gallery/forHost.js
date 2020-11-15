@@ -28,6 +28,17 @@ likes.forEach(function(like){
 })
 
 /**
+ * 게시글 좋아요 취소 onclick event 덮어쓰기
+ */
+const unlikes = document.querySelectorAll(`.unlike`);
+
+likes.forEach(function(like){
+	like.onclick = function(){
+		goJoin();
+	}
+})
+
+/**
  * 가입 유도 팝업으로 대체하기
  */
 function goJoin(){

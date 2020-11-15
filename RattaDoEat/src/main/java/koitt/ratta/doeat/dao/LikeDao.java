@@ -10,4 +10,6 @@ public interface LikeDao {
 
 	int isLike(GalleryLikeVo galleryLikeVo);
 
+	int unLike(GalleryLikeVo galleryLikeVo);
+
 }
