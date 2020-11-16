@@ -1,10 +1,13 @@
 package koitt.ratta.doeat.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import koitt.ratta.doeat.domain.AccountEntity;
 import koitt.ratta.doeat.service.MyPageService;
 
 @Controller
@@ -14,18 +17,29 @@ public class MyPageController {
 	MyPageService service;
 	
 	@GetMapping("mypage")
-	public String viewMyPage(Model model) {
-		// 서버에서 받은 로그인 정보로 대체할 것
-		int uIdx = 3;
+	public String viewMyPage(Model model, HttpSession session) {
 		
-		// 모델 1. 유저 정보
-		model.addAttribute("user", uIdx);
+		// 로그인 정보
+		AccountEntity userInfo = (AccountEntity) session.getAttribute("userInfo");
+		int uIdx = userInfo.getUIdx().intValue();
 		
-		// 모델 2. 유저 작성 갤러리 리스트 최근 10개
-		model.addAttribute("gallery", service.viewMyGallery(uIdx));
+		// 모델 2. 유저 작성 갤러리 리스트
+		model.addAttribute("myGallerys", service.viewMyGallery(uIdx));
 		
-		// 모델 3. 유저 작성 레시피북 리스트 최근 10개
-		model.addAttribute("recipe", service.viewMyGallery(uIdx));
+		// 모델 3. 유저 작성 레시피북 리스트
+		model.addAttribute("myRecipes", service.viewMyRecipe(uIdx));
+		
+		// 모델 4. 팔로우한 유저들의 새 글 (게시판명, 제목)
+		model.addAttribute("byFollowing", service.viewByFollowing(uIdx));
+		
+		// 모델 5. 덧글달린 게시글 (제목만)
+		model.addAttribute("newComment", service.viewNewComment(uIdx));
+		
+		// 모델 6. 좋아요한 글 전체
+		model.addAttribute("like", service.viewIsLike(uIdx));
+		
+		// 모델 7. 스크랩한 글 전체
+		model.addAttribute("scrap", service.viewIsScrap(uIdx));
 		
 		return "myPage";
 	}

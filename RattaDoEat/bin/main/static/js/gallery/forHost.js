@@ -19,10 +19,10 @@ isFollowFalses.forEach(function(isFollowFalse){
 /**
  * 게시글 좋아요 onclick event 덮어쓰기
  */
-const likes = document.querySelectorAll(`.like`);
+const isLikeFalses = document.querySelectorAll(`.isLikeFalse`);
 
-likes.forEach(function(like){
-	like.onclick = function(){
+isLikeFalses.forEach(function(isLikeFalse){
+	isLikeFalse.onclick = function(){
 		goJoin();
 	}
 })
@@ -30,10 +30,10 @@ likes.forEach(function(like){
 /**
  * 게시글 좋아요 취소 onclick event 덮어쓰기
  */
-const unlikes = document.querySelectorAll(`.unlike`);
+const isLikeTrues = document.querySelectorAll(`.isLikeTrue`);
 
-likes.forEach(function(like){
-	like.onclick = function(){
+isLikeTrues.forEach(function(isLikeTrue){
+	isLikeTrue.onclick = function(){
 		goJoin();
 	}
 })

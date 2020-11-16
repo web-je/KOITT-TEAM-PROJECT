@@ -60,6 +60,9 @@
 		<span th:onclick="sort('scrap_cnt')">스크랩순으로 정렬/</span>
 		<span th:onclick="sort('reg_date')">최근등록순으로 정렬</span>
 	</div>
+	
+	<hr/><hr/>
+	
 	<script th:inline="javascript">
 		let gal = "";
 	</script>
@@ -68,8 +71,10 @@
 			// 인라인 타임리프 테스트 용
 // 			gal = [[${gallery}]];
 		</script>
+		
 		<div th:each = "post : ${gallery}">
 			<div>
+				[[${post}]]
 				<span>[[${post.uIdx}]]</span>
 				<span>[[${post.name}]]</span>
 				<span>[[${post.nickname}]]</span>

@@ -3,8 +3,10 @@ package koitt.ratta.doeat.domain;
 import java.time.LocalDateTime;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * 
@@ -14,6 +16,7 @@ import lombok.NoArgsConstructor;
  * 
  */
 @Getter
+@ToString
 @NoArgsConstructor
 public class GalleryListVo {
 	

@@ -56,4 +56,12 @@ public class ContentDaoImpl implements ContentDao {
 		sqlSession.update("scrapNumUpdate", rIdx);
 	}
 	
+	/**
+	 * @author 진민영
+	 */
+	@Override
+	public List<ContentVO> getAllByUser(int uIdx) {
+		return sqlSession.selectList("getAllByUser", uIdx);
+	}
+	
 }

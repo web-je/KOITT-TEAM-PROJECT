@@ -36,4 +36,10 @@ public interface ContentMapper {
 	
 	@Update("update com_recipe set scrap_num=scrap_num+1 where r_idx=#{rIdx}")
 	void scrapNumUpdate();
+	
+	@Select("SELECT *"
+			+ " FROM com_recipe"
+			+ " WHERE u_idx = #{uIdx}")
+	List<ContentVO> getAllByUser();
+
 }

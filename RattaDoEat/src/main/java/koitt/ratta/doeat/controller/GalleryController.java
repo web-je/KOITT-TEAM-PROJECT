@@ -1,6 +1,7 @@
 package koitt.ratta.doeat.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,8 @@ public class GalleryController {
 	 * @return
 	 */
 	@GetMapping("gallery")
-	public String viewAllGallery(Model model, HttpSession session) {
+	public String viewAllGallery(Model model, HttpSession session, HttpServletRequest request) {
+		
 		// 로그인 정보
 		AccountEntity userInfo = (AccountEntity) session.getAttribute("userInfo");
 		int loginUIdx = 0;
@@ -50,6 +52,7 @@ public class GalleryController {
 			loginUIdx = userInfo.getUIdx().intValue();
 			log.info("유저 " + loginUIdx + " 갤러리 접속");
 		}
+		
 		
 		model.addAttribute("gallery", galleryService.viewAll(loginUIdx));
 		

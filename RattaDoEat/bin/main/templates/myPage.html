@@ -2,19 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>[[${user}]]님의 마이페이지</title>
+<title>[[${session.userInfo.nickname}]]님의 마이페이지</title>
 </head>
 <body>
-	<h1> 마이 페이지 테스트 </h1>
-	<p th:text="${session.userInfo.uIdx}"></p>
 	<div>
-		<span>[[${user}]]님의 유저 정보</span>
+		<div>[[${session.userInfo.uIdx}]]님의 유저 정보</div>
+		<div>[[${session.userInfo}]]</div>
+[[${session}]]
 	</div>
+	<hr/>
 	<div>
-		<div>[[${user}]]님의 갤러리 글</div>
+		<div>[[${session.userInfo.nickname}]]님의 갤러리 글</div>
 		<span th:each = "post : ${gallery}">
 			[[${post.gIdx}]]번 글 좋아요 수 [[${post.likeCnt}]] //
 		</span>
 	</div>
+	<hr/>
+	<div>
+		<div>최근 72시간 내에 달린 댓글</div>
+		<div>[[${newComment}]]</div>
+	</div>
+	<hr/>
 </body>
 </html>
