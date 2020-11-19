@@ -16,7 +16,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
-public class comCommentVO {
+public class ComCommentVO {
 
 	int cIdx;
 	int gIdx;
@@ -26,7 +26,7 @@ public class comCommentVO {
 	LocalDateTime regDate;
 	
 	@Builder
-	public comCommentVO(int cIdx, int gIdx, int rIdx, int uIdx, String galComment, LocalDateTime regDate) {
+	public ComCommentVO(int cIdx, int gIdx, int rIdx, int uIdx, String galComment, LocalDateTime regDate) {
 		this.cIdx = cIdx;
 		this.gIdx = gIdx;
 		this.rIdx = rIdx;
