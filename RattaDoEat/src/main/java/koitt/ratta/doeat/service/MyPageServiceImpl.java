@@ -97,6 +97,8 @@ public class MyPageServiceImpl implements MyPageService {
 			galleryDao.viewByGIdx(like.getGIdx());
 		}
 		
+		// 로그인 유저가 좋아요 한 레시피 게시글 조회
+		
 		return null;
 	}
 	
