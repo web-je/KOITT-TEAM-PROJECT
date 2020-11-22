@@ -13,6 +13,7 @@ import koitt.ratta.doeat.dao.LikeDao;
 import koitt.ratta.doeat.domain.ContentVO;
 import koitt.ratta.doeat.domain.GalleryLikeVo;
 import koitt.ratta.doeat.domain.GalleryListVo;
+import koitt.ratta.doeat.domain.RecipeLikeVo;
 import koitt.ratta.doeat.domain.ComCommentVO;
 
 /**
@@ -98,7 +99,9 @@ public class MyPageServiceImpl implements MyPageService {
 		}
 		
 		// 로그인 유저가 좋아요 한 레시피 게시글 조회
-		
+		for (RecipeLikeVo like : likeDao.getRecipeByUIdx(uIdx)) {
+			contentDao.viewByRIdx(like.getRIdx());
+		}
 		return null;
 	}
 	

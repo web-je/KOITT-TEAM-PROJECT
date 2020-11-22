@@ -35,5 +35,10 @@ public interface LikeMapper {
 			+ " FROM gallery_like"
 			+ " WHERE u_idx = #{uIdx}")
 	public List<GalleryLikeVo> viewLikesByUIdx(int uIdx);
+	
+	@Select("SELECT r_idx"
+			+ " FROM recipe_like"
+			+ " WHERE u_idx = #{uIdx}")
+	public List<GalleryLikeVo> getByUIdx(int uIdx);
 
 }

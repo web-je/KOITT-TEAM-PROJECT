@@ -10,13 +10,13 @@ public class RecipeLikeVo {
 	
 	int rLIdx;
 	int uIdx;
-	int lIdx;
+	int rIdx;
 	
 	@Builder
-	public RecipeLikeVo(int rLIdx, int uIdx, int lIdx) {
+	public RecipeLikeVo(int rLIdx, int uIdx, int rIdx) {
 		this.rLIdx = rLIdx;
 		this.uIdx = uIdx;
-		this.lIdx = lIdx;
+		this.rIdx = rIdx;
 	}
 
 }

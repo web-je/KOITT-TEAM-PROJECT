@@ -3,6 +3,7 @@ package koitt.ratta.doeat.dao;
 import java.util.List;
 
 import koitt.ratta.doeat.domain.GalleryLikeVo;
+import koitt.ratta.doeat.domain.RecipeLikeVo;
 
 public interface LikeDao {
 
@@ -15,5 +16,7 @@ public interface LikeDao {
 	int unLike(GalleryLikeVo galleryLikeVo);
 
 	List<GalleryLikeVo> viewLikesByUIdx(int uIdx);
+
+	List<RecipeLikeVo> getRecipeByUIdx(int uIdx);
 
 }
