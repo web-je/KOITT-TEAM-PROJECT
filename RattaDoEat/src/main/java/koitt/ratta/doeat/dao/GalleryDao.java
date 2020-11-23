@@ -17,7 +17,7 @@ public interface GalleryDao {
 	// 게시물 상세보기
 	public GalleryVo viewDetail(int gIdx);
 
-	List<GalleryListVo> viewByGIdx(int gIdx);
+	GalleryListVo viewByGIdx(int gIdx);
 	
 //	// 유저 이름 조회
 //	public String userName(int gIdx);

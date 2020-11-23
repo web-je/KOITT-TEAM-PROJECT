@@ -39,7 +39,7 @@ public class GalleryDaoImpl implements GalleryDao{
 	}
 
 	@Override
-	public List<GalleryListVo> viewByGIdx(int gIdx) {
+	public GalleryListVo viewByGIdx(int gIdx) {
 		// TODO Auto-generated method stub
 		return null;
 	}
