@@ -132,7 +132,7 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<CommunityVO> viewIsScrap(int uIdx) {
 		
 		List<CommunityVO> communitys = new ArrayList<CommunityVO>();
-		
+				
 		for (RecipeScrapVo scrap : scrapDao.getRecipeByUIdx(uIdx)) {
 			
 		}
