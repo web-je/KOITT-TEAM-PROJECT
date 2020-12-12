@@ -17,16 +17,14 @@ public class CommunityVO {
 	int gIdx;
 	int rIdx;
 	int uIdx;
-	String content;
-	String imgUuid;
+	String imgPath;
 	
 	@Builder
-	public CommunityVO(int gIdx, int rIdx, int uIdx, String content, String imgUuid) {
+	public CommunityVO(int gIdx, int rIdx, int uIdx, String imgPath) {
 		this.gIdx = gIdx;
 		this.rIdx = rIdx;
 		this.uIdx = uIdx;
-		this.content = content;
-		this.imgUuid = imgUuid;
+		this.imgPath = imgPath;
 	}
 
 }

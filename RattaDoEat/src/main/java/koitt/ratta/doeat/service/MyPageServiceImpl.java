@@ -6,15 +6,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import koitt.ratta.doeat.config.UploadPath;
 import koitt.ratta.doeat.dao.CommentDao;
 import koitt.ratta.doeat.dao.ContentDao;
 import koitt.ratta.doeat.dao.GalleryDao;
 import koitt.ratta.doeat.dao.LikeDao;
 import koitt.ratta.doeat.dao.ScrapDao;
 import koitt.ratta.doeat.domain.ContentVO;
+import koitt.ratta.doeat.domain.ContentVOWrapper;
 import koitt.ratta.doeat.domain.GalleryLikeVo;
 import koitt.ratta.doeat.domain.GalleryListVo;
-import koitt.ratta.doeat.domain.GalleryScrapVo;
 import koitt.ratta.doeat.domain.RecipeLikeVo;
 import koitt.ratta.doeat.domain.RecipeScrapVo;
 import koitt.ratta.doeat.domain.ComCommentVO;
@@ -42,7 +43,7 @@ public class MyPageServiceImpl implements MyPageService {
 	
 	@Autowired
 	ScrapDao scrapDao;
-	
+
 	/**
 	 * 유저가 작성한 갤러리 글 조회
 	 */
@@ -108,17 +109,18 @@ public class MyPageServiceImpl implements MyPageService {
 			GalleryListVo gallery = galleryDao.viewByGIdx(like.getGIdx());
 			CommunityVO tmp = CommunityVO.builder().gIdx(gallery.getGIdx())
 												   .uIdx(gallery.getUIdx())
-												   .content(gallery.getContent())
-												   .imgUuid(gallery.getImgUuid()).build();
+												   .imgPath(UploadPath.galleryPath + gallery.getImgUuid()).build();
 			communitys.add(tmp);
 		}
 		
 		// 로그인 유저가 좋아요 한 레시피 게시글 조회
 		for (RecipeLikeVo like : likeDao.getRecipeByUIdx(uIdx)) {
 			ContentVO content = contentDao.viewByRIdx(like.getRIdx());
+			ContentVOWrapper contentVOWrapper = new ContentVOWrapper(content);
+			
 			CommunityVO tmp = CommunityVO.builder().gIdx(content.getRIdx())
 												   .uIdx(content.getUIdx())
-												   .content(content.getContent()).build();
+												   .imgPath(contentVOWrapper.getFirstImgFilePath()).build();
 			communitys.add(tmp);
 		}
 		return communitys;

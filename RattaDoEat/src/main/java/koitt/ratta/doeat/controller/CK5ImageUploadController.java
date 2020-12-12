@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import koitt.ratta.doeat.config.UploadPath;
 import koitt.ratta.doeat.service.FileNamingEncoder;
 
 @Controller
@@ -62,7 +63,7 @@ public class CK5ImageUploadController {
 
 		try {
 			map.put("uploaded", true);
-			map.put("url", "upload/recipe_img/" + filename);
+			map.put("url", UploadPath.recipePath + filename);
 
 			json = mapper.writeValueAsString(map);
 
